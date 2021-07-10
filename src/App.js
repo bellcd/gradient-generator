@@ -1,36 +1,51 @@
 import './App.css';
 import { useState } from 'react';
+import Flyout from './Flyout';
+import { makeGradientString } from './utils/gradient-utils';
 
 function App() {
-  const [colorOne, setColorOne] = useState('000');
-  const [colorTwo, setColorTwo] = useState('000');
-  const [background, setBackground] = useState('');
-  const [typeOfGradient, setTypeOfGradient] = useState('linear');
-  const [degreeCount, setDegreeCount] = useState(0);
-  const [colors, setColors] = useState([colorOne, colorTwo]);
+  const [colors, setColors] = useState(['#ff0000', '#0000ff']);
+  const [degrees, setDegrees] = useState(0);
 
-
-  const makeBackgroundString = () => {
-    const colorString = colors.reduce((acc, currentValue) => `${acc}, ${currentValue}`);
-    return `${typeOfGradient}-gradient(${degreeCount}deg, ${colorString})`
-  }
+  const gradientString = makeGradientString(colors, degrees);
 
   return (
     <>
-      <div>
-        <input type="color" id="color-one" name="color-one" value={colorOne} onInput={(e) => {
-          debugger;
-          setColorOne()
-        }} />
-        <label htmlFor="color-one">Color One</label>
+      <div
+        className="gradient"
+        style={{ background: gradientString }}
+      >
       </div>
-      <div>
-        <input type="color" id="color-two" name="color-two" value={colorTwo} onInput={setColorTwo}/>
-        <label htmlFor="color-two">Color One</label>
-      </div>
-      <div className="display-box" style={{ background: makeBackgroundString() }}/>
+      <Flyout
+        degrees={degrees}
+        colors={colors}
+        setColors={setColors}
+        setDegrees={setDegrees}
+      />
     </>
   );
 }
 
 export default App;
+
+// TODOs:
+  // bugs
+    // min 2 colors
+  // layout of options grid
+  // convert CSS to SCSS
+  // generate a random gradient
+  // change the color mode
+    // hexademical
+    // rgb
+    // hsl
+  // change the gradient mode
+    // linear
+    // radial
+    // conic
+  // add color stops
+    // repeating-linear-gradient
+    // repeating-radial-gradient
+  // polishing
+    // fonts
+    // icons
+  // testing
