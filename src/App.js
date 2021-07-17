@@ -33,7 +33,7 @@ export default App;
 
 // TODOs:
   // bugs
-    // min 2 colors
+    // editing the color input field directly
   // input validation
     // type the color
   // convert CSS to SCSS
@@ -57,4 +57,8 @@ export default App;
     // fonts
     // icons
   // testing
+    // App
+    // Color
+    // Colors
+    // Flyout
   // mobile design

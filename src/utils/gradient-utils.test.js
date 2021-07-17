@@ -15,23 +15,19 @@ describe('gradient-utils', () => {
       const colors = [
         {
           color: '#ff0000',
-          stopPositions: [0.10, 0.25],
-          desiredStopPositions: 2
+          stopPositions: [0.10, 0.25]
         },
         {
           color: '#0000ff',
-          stopPositions: [0.30],
-          desiredStopPositions: 1
+          stopPositions: [0.30]
         },
         {
           color: '#6ecbfb',
-          stopPositions: [],
-          desiredStopPositions: 0
+          stopPositions: []
         },
         {
           color: '#c3df7d',
-          stopPositions: [0.95],
-          desiredStopPositions: 1
+          stopPositions: [0.95]
         },
       ];
       const result = makeGradientString(colors, 100);

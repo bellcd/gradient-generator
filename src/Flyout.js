@@ -134,8 +134,7 @@ const Flyout = ({
             onClick={() => {
               setColors([...colors, {
                 color: randomColorGenerator(),
-                stopPositions: [],
-                desiredStopPositions: 0
+                stopPositions: []
               }])
             }}
           >

@@ -18,18 +18,22 @@ return (
         <Fragment key={j}>
           <input
             type="number"
-            name={`stop-position-${j + 1}-color-${colorIndex}`}
+            name={`stop-position-${j}-color-${colorIndex}`}
+            id={`stop-position-${j}-color-${colorIndex}`}
             value={stopPositionsLength === 0 ? '' : Math.trunc(position * 100)}
-            disabled={stopPositionsLength < 1}
             onChange={stopPercentChangeHandler(colorIndex, j)}
             min="0"
             max="100"
+            data-testid={`stop-position-${j}-color-${colorIndex}`}
           ></input>
-          <label htmlFor={`stop-position-${j + 1}`}>{j === 0 ? '1st' : '2nd'}</label>
+          <label
+            htmlFor={`stop-position-${j}-color-${colorIndex}`}
+          >
+            {j === 0 ? '1st' : '2nd'}
+          </label>
           <button
             onClick={addOrRemoveStopPositionHandler(colorIndex, false, j)}
-            disabled={stopPositionsLength === 0}
-          >X</button>
+          >x</button>
         </Fragment>
       );
     })}
