@@ -34,7 +34,6 @@ export default App;
 // TODOs:
   // bugs
     // min 2 colors
-    // addOrRemoveStopPositionHandler
   // input validation
     // type the color
   // convert CSS to SCSS
