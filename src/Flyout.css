@@ -1,23 +1,28 @@
 .flyout {
   background-color: aliceblue;
-  position: absolute;
-  top: 0;
-  left: 0;
   transition: all 0.3s ease-out;
   width: 20rem;
   height: 100vh;
+  position: relative;
 }
 
-.flyout__open {
-  left: 0;
+.flyout--closed .flyout__content {
+  overflow: hidden;
 }
 
-.flyout__closed {
-  left: -20rem;
+.flyout--open {
+  width: 70%;
+  overflow: visible;
+}
+
+.flyout--closed {
+  width: 0;
 }
 
 .flyout__control-button {
   position: absolute;
+  top: 0;
+  right: 0;
   font-size: 1.5rem;
   transition: all 0.3s ease-out;
 }
