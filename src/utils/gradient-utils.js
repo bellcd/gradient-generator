@@ -1,14 +1,17 @@
 export const makeGradientString = (colors, degrees) => {
   const colorString = colors.reduce((acc, colorObj, i) => {
-      const stops = colorObj.stopPositions.length > 0 ? (
-        colorObj.stopPositions.reduce((allStops, currentStop, j) => {
-          return `${allStops}${j === 0 ? '' : ', '}${currentStop * 100}%`
-        }, ' ')
-      ) : '';
-    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${stops}`
+    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
   }, '');
   return `linear-gradient(${degrees}deg, ${colorString})`;
 };
+
+export const makeGradientColorStops = colorObj => {
+  return colorObj.stopPositions.length > 0 ? (
+    colorObj.stopPositions.reduce((allStops, currentStop, j) => {
+      return `${allStops}${j === 0 ? '' : ' '}${currentStop * 100}%`
+    }, ' ')
+  ) : '';
+}
 
 export const randomColorGenerator = () => {
   const array = [];

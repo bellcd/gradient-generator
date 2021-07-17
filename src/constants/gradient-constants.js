@@ -14,4 +14,6 @@ export const defaultColors = [
     stopPositions: [0.80],
     desiredStopPositions: 0
   },
-]
+];
+
+export const defaultDegree = 90;

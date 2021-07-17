@@ -1,12 +1,12 @@
 import './App.css';
 import { useState } from 'react';
-import { defaultColors } from './constants/gradient-constants';
+import { defaultColors, defaultDegree } from './constants/gradient-constants';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
-  const [degrees, setDegrees] = useState(90);
+  const [degrees, setDegrees] = useState(defaultDegree);
 
   const gradientString = makeGradientString(colors, degrees);
 
