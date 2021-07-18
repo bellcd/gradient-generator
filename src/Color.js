@@ -13,6 +13,7 @@ const Color = ({
     <>
       <label htmlFor={`color-${colorIndex}-text-input`}>{`color-${colorIndex}`}</label>
       <input
+        id={`color-${colorIndex}-text-input`}
         type="text"
         name={`color-${colorIndex}-text-input`}
         value={colorObj.color}
@@ -21,10 +22,12 @@ const Color = ({
       <div>
         <label htmlFor={`color-${colorIndex}-color-picker`}></label>
         <input
+          id={`color-${colorIndex}-color-picker`}
           type="color"
           name={`color-${colorIndex}-color-picker`}
           value={colorObj.color}
           onInput={inputChangeHandler(colorIndex)}
+          data-testid={`color-${colorIndex}-color-picker`}
         />
       </div>
       <StopPositions
@@ -36,6 +39,7 @@ const Color = ({
       <button
         disabled={isDisabled}
         onClick={deleteColor(colorIndex)}
+        data-testid={`color-${colorIndex}-delete-button`}
       >x</button>
     </>
   );
