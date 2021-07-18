@@ -12,6 +12,7 @@ return (
     <button
       onClick={addOrRemoveStopPositionHandler(colorIndex, true)}
       disabled={stopPositionsLength === 2}
+      data-testid={`color-${colorIndex}-add-stop-position`}
     >Add</button>
     {colorObj.stopPositions.map((position, j) => {
       return (
@@ -33,6 +34,7 @@ return (
           </label>
           <button
             onClick={addOrRemoveStopPositionHandler(colorIndex, false, j)}
+            data-testid={`stop-position-${j}-color-${colorIndex}-delete-button`}
           >x</button>
         </Fragment>
       );
