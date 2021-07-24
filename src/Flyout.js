@@ -20,8 +20,12 @@ const Flyout = ({
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(true);
 
   const inputChangeHandler = i => event => {
+    // TODO: event.target.value needs to be a valid input
     setColors(
-      colors.map((color, index) => index === i ? event.target.value : color)
+      colors.map((colorObj, index) => index === i ? {
+        ...colorObj,
+        color: event.target.value
+      } : colorObj)
     );
   }
 

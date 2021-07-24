@@ -1,4 +1,5 @@
 import StopPositions from './StopPositions';
+import { inputPattern } from './constants/gradient-constants';
 
 const Color = ({
   colorObj,
@@ -18,6 +19,7 @@ const Color = ({
         name={`color-${colorIndex}-text-input`}
         value={colorObj.color}
         onInput={inputChangeHandler(colorIndex)}
+        pattern={inputPattern}
       />
       <div>
         <label htmlFor={`color-${colorIndex}-color-picker`}></label>
@@ -46,8 +48,3 @@ const Color = ({
 };
 
 export default Color;
-
-// start, end, or numbered color
-// input field where user can type the color, in HEX
-// colorpicker field
-// color stops

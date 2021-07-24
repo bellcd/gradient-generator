@@ -117,6 +117,7 @@ export default App;
     // editing the color input field directly
   // input validation
     // type the color
+    // add formik
   // convert CSS to SCSS
   // generate a random gradient
   // change the color mode
@@ -134,12 +135,9 @@ export default App;
     // repeating-radial-gradient
   // add color hints
     // only valid between color stops
+  // inputs
+    // circle input for changing degrees
   // polishing
     // fonts
     // icons
-  // testing
-    // App
-    // Color
-    // Colors
-    // Flyout
   // mobile design

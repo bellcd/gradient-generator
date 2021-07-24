@@ -14,3 +14,5 @@ export const defaultColors = [
 ];
 
 export const defaultDegree = 90;
+
+export const inputPattern = '#[a-fA-F0-9]{6}';
