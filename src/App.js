@@ -1,14 +1,20 @@
 import './App.css';
 import { useState } from 'react';
-import { defaultColors, defaultDegree } from './constants/gradient-constants';
+import {
+  defaultColors,
+  defaultGradientOptions
+} from './constants/gradient-constants';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
-  const [degrees, setDegrees] = useState(defaultDegree);
+  // const [degrees, setDegrees] = useState(defaultDegree);
+  // const [gradientType, setGradientType] = useState(defaultGradientType);
+  const [gradientOptions, setGradientOptions] = useState(defaultGradientOptions);
 
-  const gradientString = makeGradientString(colors, degrees);
+  // const gradientString = makeGradientString(gradientType, colors, degrees);
+  const gradientString = makeGradientString(colors, gradientOptions);
 
   const makeRandomPercentInRange = (min, max) => {
     const minAsInteger = Math.round(min * 100);
@@ -84,13 +90,17 @@ function App() {
   return (
     <div className="wrapper">
       <Flyout
-        degrees={degrees}
+        // degrees={degrees}
         colors={colors}
         setColors={setColors}
-        setDegrees={setDegrees}
+        // setDegrees={setDegrees}
         addOrRemoveStopPositionHandler={addOrRemoveStopPositionHandler}
         stopPercentChangeHandler={stopPercentChangeHandler}
         deleteColor={deleteColor}
+        // gradientType={gradientType}
+        // setGradientType={setGradientType}
+        gradientOptions={gradientOptions}
+        setGradientOptions={setGradientOptions}
       />
       <div
         className="gradient"

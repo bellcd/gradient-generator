@@ -13,6 +13,12 @@ export const defaultColors = [
   },
 ];
 
-export const defaultDegree = 90;
-
 export const inputPattern = '#[a-fA-F0-9]{6}';
+
+export const defaultGradientOptions = {
+  gradientType: 'linear',
+  degrees: 90,
+  endingShape: 'circle',
+  size: '1rem',
+  position: '50% 50%'
+};

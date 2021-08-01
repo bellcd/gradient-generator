@@ -11,11 +11,15 @@ import classNames from 'classnames';
 const Flyout = ({
   colors,
   setColors,
-  degrees,
-  setDegrees,
+  // degrees,
+  // setDegrees,
   addOrRemoveStopPositionHandler,
   stopPercentChangeHandler,
-  deleteColor
+  deleteColor,
+  // gradientType,
+  // setGradientType,
+  gradientOptions,
+  setGradientOptions
 }) => {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(true);
 
@@ -28,7 +32,7 @@ const Flyout = ({
     );
   }
 
-  const gradientString = makeGradientString(colors, degrees);
+  const gradientString = makeGradientString(colors, gradientOptions);
 
   const onFlyoutButtonClick = () => setIsFlyoutOpen(!isFlyoutOpen);
 
@@ -66,23 +70,82 @@ const Flyout = ({
           >
             Add a random color
           </button>
-          <div>
-            <input
-              id="degrees"
-              type="number"
-              name="degrees"
-              value={degrees}
-              onChange={event => { setDegrees(event.target.value)}}
-              min={0}
-              max={360}
-            />
-            <label htmlFor="degrees">degrees</label>
-          </div>
+
+          {/* TODO: add tests */}
+          {gradientOptions.gradientType === 'linear' && (
+            <div>
+              <input
+                id="degrees"
+                type="number"
+                name="degrees"
+                value={gradientOptions.degrees}
+                onChange={event => { setGradientOptions({
+                  ...gradientOptions,
+                  degrees: event.target.value
+                })}}
+                min={0}
+                max={360}
+              />
+              <label htmlFor="degrees">degrees</label>
+            </div>
+          )}
           <div>
             <label htmlFor="gradient-type">Gradient Type</label>
-            <select name="gradient-type">
+            <select
+              name="gradient-type"
+              value={gradientOptions.gradientType}
+              onChange={event => setGradientOptions({
+                ...gradientOptions,
+                gradientType: event.target.value
+              })}
+            >
               <option value="linear">Linear</option>
+              <option value="radial">Radial</option>
             </select>
+          </div>
+          <div>
+            <label htmlFor="ending-shape">Ending Shape</label>
+            <select
+              name="ending-shape"
+              value={gradientOptions.endingShape}
+              onChange={event => setGradientOptions({
+                ...gradientOptions,
+                endingShape: event.target.value
+              })}
+            >
+              <option value="circle">Circle</option>
+              <option value="ellipse">Ellipse</option>
+            </select>
+            <div>
+              <input
+                id="size"
+                type="text"
+                name="size"
+                value={gradientOptions.size}
+                onChange={event => { setGradientOptions({
+                  ...gradientOptions,
+                  size: event.target.value
+                })}}
+                min={0}
+                max={360}
+              />
+              <label htmlFor="size">size</label>
+            </div>
+            <div>
+              <input
+                id="position"
+                type="text"
+                name="position"
+                value={gradientOptions.position}
+                onChange={event => { setGradientOptions({
+                  ...gradientOptions,
+                  position: event.target.value
+                })}}
+                min={0}
+                max={360}
+              />
+              <label htmlFor="position">position</label>
+            </div>
           </div>
         </div>
       </div>

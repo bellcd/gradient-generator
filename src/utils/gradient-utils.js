@@ -1,8 +1,28 @@
-export const makeGradientString = (colors, degrees) => {
+// TODO: update tests
+export const makeGradientString = (colors, { gradientType, degrees }) => {
   const colorString = colors.reduce((acc, colorObj, i) => {
     return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
   }, '');
-  return `linear-gradient(${degrees}deg, ${colorString})`;
+
+  let gradientString;
+  if (gradientType === 'linear') {
+    gradientString = `linear-gradient(${degrees}deg, ${colorString})`;
+  } else if (gradientType === 'radial') {
+    // TODO: improvement, allow using keywords (several spots)
+    // radial-gradient
+      // [ <ending-shape> || <size> ]? at [ at <position> ]?, <color-stop-list>
+      // <ending-shape> is either circle or ellipse
+      // if circle
+        // <size> must be a length (ie, not a percent)
+      // if ellipse
+        // <size> must be two percents, cannot be negative
+    gradientString = `radial-gradient(${degrees}deg, ${colorString})`;
+
+  } else if (gradientType === 'conic') {
+
+  }
+
+  return gradientString;
 };
 
 export const makeGradientColorStops = colorObj => {
