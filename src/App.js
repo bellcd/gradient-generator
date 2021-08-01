@@ -25,13 +25,9 @@ function App() {
       if (index === colorIndexToChange) {
         const stopPositions = colorObj.stopPositions;
         let min = 0;
-        // mins
-          // if this color already has a stop
           if (stopPositions.length > 0) {
-            // min is the last stop
             min = stopPositions[stopPositions.length - 1];
           } else if (index !== 0) {
-            // look backwards through array for the first min you encounter, going backwards, otherwise set to 0
             for (let i = index - 1; i >= 0; i--) {
               if (colors[i].stopPositions.length > 0) {
                 min = colors[i].stopPositions[colors[i].stopPositions.length - 1];
@@ -39,19 +35,14 @@ function App() {
               }
             }
           }
-        // debugger;
         let max = 1;
-        // maxs
-          // if this is the last color
           if (index !== colors.length - 1) {
-            // max is the first color stop you encounter looking forwards through array, otherwise set to 100 if none
             for (let i = index + 1; i < colors.length; i++) {
               if (colors[i].stopPositions.length > 0) {
                 max = colors[i].stopPositions[0];
                 break;
               }
             }
-            // max = 100;
           }
 
         const newStopPositions = isAdd ? (
@@ -113,13 +104,9 @@ function App() {
 export default App;
 
 // TODOs:
-  // bugs
-    // editing the color input field directly
   // input validation
     // type the color
-    // add formik
   // convert CSS to SCSS
-  // generate a random gradient
   // change the color mode
     // hexademical
     // rgb
@@ -129,7 +116,6 @@ export default App;
     // radial
     // conic
   // add color stops
-    // new stop positions default to ?? random percent?
     // identify bug with stop positions not incrementing on up / down keypress
     // repeating-linear-gradient
     // repeating-radial-gradient
