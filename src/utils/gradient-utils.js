@@ -1,5 +1,12 @@
 // TODO: update tests
-export const makeGradientString = (colors, { gradientType, degrees }) => {
+export const makeGradientString = (colors, {
+  gradientType,
+  degrees,
+  endingShape,
+  size,
+  xPosition,
+  yPosition
+}) => {
   const colorString = colors.reduce((acc, colorObj, i) => {
     return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
   }, '');
@@ -9,14 +16,16 @@ export const makeGradientString = (colors, { gradientType, degrees }) => {
     gradientString = `linear-gradient(${degrees}deg, ${colorString})`;
   } else if (gradientType === 'radial') {
     // TODO: improvement, allow using keywords (several spots)
+    // TODO: add tests around radial gradients
     // radial-gradient
-      // [ <ending-shape> || <size> ]? at [ at <position> ]?, <color-stop-list>
+      // [ <ending-shape> || <size> ]? [ at <position> ]?, <color-stop-list>
+      // [ <ending-shape> || <size> ]? [ at <position> ]? ,<color-stop-list>
       // <ending-shape> is either circle or ellipse
       // if circle
         // <size> must be a length (ie, not a percent)
       // if ellipse
         // <size> must be two percents, cannot be negative
-    gradientString = `radial-gradient(${degrees}deg, ${colorString})`;
+    gradientString = `radial-gradient(${endingShape} ${size} at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
 
   } else if (gradientType === 'conic') {
 

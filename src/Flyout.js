@@ -74,6 +74,7 @@ const Flyout = ({
           {/* TODO: add tests */}
           {gradientOptions.gradientType === 'linear' && (
             <div>
+              <label htmlFor="degrees">degrees</label>
               <input
                 id="degrees"
                 type="number"
@@ -86,12 +87,12 @@ const Flyout = ({
                 min={0}
                 max={360}
               />
-              <label htmlFor="degrees">degrees</label>
             </div>
           )}
           <div>
             <label htmlFor="gradient-type">Gradient Type</label>
             <select
+              id="gradient-type"
               name="gradient-type"
               value={gradientOptions.gradientType}
               onChange={event => setGradientOptions({
@@ -106,6 +107,7 @@ const Flyout = ({
           <div>
             <label htmlFor="ending-shape">Ending Shape</label>
             <select
+              id="ending-shape"
               name="ending-shape"
               value={gradientOptions.endingShape}
               onChange={event => setGradientOptions({
@@ -117,7 +119,8 @@ const Flyout = ({
               <option value="ellipse">Ellipse</option>
             </select>
             <div>
-              <input
+              <label htmlFor="size">size</label>
+              <select
                 id="size"
                 type="text"
                 name="size"
@@ -126,25 +129,46 @@ const Flyout = ({
                   ...gradientOptions,
                   size: event.target.value
                 })}}
-                min={0}
-                max={360}
-              />
-              <label htmlFor="size">size</label>
+              >
+                <option>closest-side</option>
+                <option>farthest-side</option>
+                <option>closest-corner</option>
+                <option>farthest-corner</option>
+              </select>
             </div>
             <div>
+              <label htmlFor="x-position">x position %</label>
               <input
-                id="position"
-                type="text"
-                name="position"
-                value={gradientOptions.position}
+                id="x-position"
+                type="number"
+                name="x-position"
+                value={Math.round(gradientOptions.xPosition * 100)}
+                onChange={event => {
+                  setGradientOptions({
+                    ...gradientOptions,
+                    xPosition: Number((event.target.value / 100).toFixed(2))
+                  })
+                }}
+                min={0}
+                max={100}
+                step={1}
+              />
+            </div>
+            <div>
+              <label htmlFor="y-position">y position %</label>
+              <input
+                id="y-position"
+                type="number"
+                name="y-position"
+                value={Math.round(gradientOptions.yPosition * 100)}
                 onChange={event => { setGradientOptions({
                   ...gradientOptions,
-                  position: event.target.value
+                  yPosition: Number((event.target.value / 100).toFixed(2))
                 })}}
                 min={0}
-                max={360}
+                max={100}
+                step={1}
               />
-              <label htmlFor="position">position</label>
             </div>
           </div>
         </div>

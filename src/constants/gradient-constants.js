@@ -19,6 +19,7 @@ export const defaultGradientOptions = {
   gradientType: 'linear',
   degrees: 90,
   endingShape: 'circle',
-  size: '1rem',
-  position: '50% 50%'
+  size: 'closest-side',
+  xPosition: 0.50,
+  yPosition: 0.50,
 };
