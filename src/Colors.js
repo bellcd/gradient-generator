@@ -1,4 +1,6 @@
+import React, { useContext } from 'react';
 import Color from './Color';
+import { MessagesContext } from './App';
 import './Colors.css';
 
 const Colors = ({
@@ -8,17 +10,25 @@ const Colors = ({
   deleteColor,
   inputChangeHandler
 }) => {
+  const {
+    COLOR,
+    TYPE_THE_COLOR,
+    HEXADECIMAL_FORMAT_EXPLAINER,
+    COLOR_PICKER,
+    OPTIONAL_STOP_PERCENTS,
+    DELETE_COLOR
+  } = useContext(MessagesContext);
   return (
     <div className="colors">
-      <span>Color</span>
+      <span>{COLOR}</span>
       <span>
-        <div>Type the Color</div>
+        <div>{TYPE_THE_COLOR}</div>
         {/* // TODO: this would be better in a popup */}
-        <div>Hexadecimal format (ie, a "#", followed by exactly 6 characters. Those 6 characters must be either the digits 0 through 9, or one of the letters, a, b, c, d, e, or f</div>
+        <div>{HEXADECIMAL_FORMAT_EXPLAINER}</div>
       </span>
-      <span>Color Picker</span>
-      <span>Optional Stop Percents</span>
-      <span>Delete Color</span>
+      <span>{COLOR_PICKER}</span>
+      <span>{OPTIONAL_STOP_PERCENTS}</span>
+      <span>{DELETE_COLOR}</span>
       {colors.map((colorObj, colorIndex, colorsArray) => {
         return <Color
           key={colorIndex}

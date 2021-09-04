@@ -1,11 +1,14 @@
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   defaultColors,
   defaultGradientOptions
 } from './constants/gradient-constants';
+import messages from './translations/messages';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
+
+export const MessagesContext = React.createContext({});
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
@@ -88,26 +91,28 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
-      <Flyout
-        // degrees={degrees}
-        colors={colors}
-        setColors={setColors}
-        // setDegrees={setDegrees}
-        addOrRemoveStopPositionHandler={addOrRemoveStopPositionHandler}
-        stopPercentChangeHandler={stopPercentChangeHandler}
-        deleteColor={deleteColor}
-        // gradientType={gradientType}
-        // setGradientType={setGradientType}
-        gradientOptions={gradientOptions}
-        setGradientOptions={setGradientOptions}
-      />
-      <div
-        className="gradient"
-        style={{ background: gradientString }}
-      >
+    <MessagesContext.Provider value={messages}>
+      <div className="wrapper">
+        <Flyout
+          // degrees={degrees}
+          colors={colors}
+          setColors={setColors}
+          // setDegrees={setDegrees}
+          addOrRemoveStopPositionHandler={addOrRemoveStopPositionHandler}
+          stopPercentChangeHandler={stopPercentChangeHandler}
+          deleteColor={deleteColor}
+          // gradientType={gradientType}
+          // setGradientType={setGradientType}
+          gradientOptions={gradientOptions}
+          setGradientOptions={setGradientOptions}
+        />
+        <div
+          className="gradient"
+          style={{ background: gradientString }}
+        >
+        </div>
       </div>
-    </div>
+    </MessagesContext.Provider>
   );
 }
 

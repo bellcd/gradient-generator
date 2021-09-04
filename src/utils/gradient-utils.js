@@ -1,3 +1,6 @@
+import { gradientWords } from "../constants/gradient-constants";
+const { LINEAR, RADIAL, CONIC } = gradientWords;
+
 // TODO: update tests
 export const makeGradientString = (colors, {
   gradientType,
@@ -12,9 +15,9 @@ export const makeGradientString = (colors, {
   }, '');
 
   let gradientString;
-  if (gradientType === 'linear') {
-    gradientString = `linear-gradient(${degrees}deg, ${colorString})`;
-  } else if (gradientType === 'radial') {
+  if (gradientType === LINEAR) {
+    gradientString = `${LINEAR}-gradient(${degrees}deg, ${colorString})`;
+  } else if (gradientType === RADIAL) {
     // TODO: improvement, allow using keywords (several spots)
     // TODO: add tests around radial gradients
     // radial-gradient
@@ -25,10 +28,10 @@ export const makeGradientString = (colors, {
         // <size> must be a length (ie, not a percent)
       // if ellipse
         // <size> must be two percents, cannot be negative
-    gradientString = `radial-gradient(${endingShape} ${size} at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
+    gradientString = `${RADIAL}-gradient(${endingShape} ${size} at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
 
-  } else if (gradientType === 'conic') {
-
+  } else if (gradientType === CONIC) {
+    gradientString = `${CONIC}-gradient(from ${degrees}deg at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
   }
 
   return gradientString;

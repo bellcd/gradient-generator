@@ -1,4 +1,5 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
+import { MessagesContext } from './App';
 
 const StopPositions = ({
   colorObj,
@@ -6,6 +7,13 @@ const StopPositions = ({
   stopPercentChangeHandler,
   addOrRemoveStopPositionHandler
 }) => {
+  const {
+    ADD,
+    X,
+    FIRST,
+    SECOND
+  } = useContext(MessagesContext);
+
   const stopPositionsLength = colorObj.stopPositions.length;
 return (
   <div>
@@ -13,7 +21,7 @@ return (
       onClick={addOrRemoveStopPositionHandler(colorIndex, true)}
       disabled={stopPositionsLength === 2}
       data-testid={`color-${colorIndex}-add-stop-position`}
-    >Add</button>
+    >{ADD}</button>
     {colorObj.stopPositions.map((position, j) => {
       return (
         <Fragment key={j}>
@@ -30,12 +38,12 @@ return (
           <label
             htmlFor={`stop-position-${j}-color-${colorIndex}`}
           >
-            {j === 0 ? '1st' : '2nd'}
+            {j === 0 ? FIRST : SECOND}
           </label>
           <button
             onClick={addOrRemoveStopPositionHandler(colorIndex, false, j)}
             data-testid={`stop-position-${j}-color-${colorIndex}-delete-button`}
-          >x</button>
+          >{X}</button>
         </Fragment>
       );
     })}
