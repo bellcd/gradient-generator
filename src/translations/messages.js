@@ -1,3 +1,5 @@
+import React from 'react';
+
 const messages = {
     ADD: 'Add',
     X: 'x',
@@ -30,3 +32,5 @@ const messages = {
 };
 
 export default messages;
+
+export const MessagesContext = React.createContext({});

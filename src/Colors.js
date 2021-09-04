@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Color from './Color';
-import { MessagesContext } from './App';
+import { MessagesContext } from './translations/messages';
 import './Colors.css';
 
 const Colors = ({

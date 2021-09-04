@@ -8,18 +8,14 @@ import {
 import { gradientWords } from './constants/gradient-constants';
 import Colors from './Colors';
 import classNames from 'classnames';
-import { MessagesContext } from './App';
+import { MessagesContext } from './translations/messages';
 
 const Flyout = ({
   colors,
   setColors,
-  // degrees,
-  // setDegrees,
   addOrRemoveStopPositionHandler,
   stopPercentChangeHandler,
   deleteColor,
-  // gradientType,
-  // setGradientType,
   gradientOptions,
   setGradientOptions
 }) => {
@@ -96,10 +92,10 @@ const Flyout = ({
 
           {/* TODO: add tests */}
           <div>
-            <label htmlFor="gradient-type">{GRADIENT_TYPE}</label>
+            <label htmlFor={gradientWords.GRADIENT_TYPE}>{GRADIENT_TYPE}</label>
             <select
-              id="gradient-type"
-              name="gradient-type"
+              id={gradientWords.GRADIENT_TYPE}
+              name={gradientWords.GRADIENT_TYPE}
               value={gradientOptions.gradientType}
               onChange={event => setGradientOptions({
                 ...gradientOptions,

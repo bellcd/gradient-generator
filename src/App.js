@@ -4,11 +4,9 @@ import {
   defaultColors,
   defaultGradientOptions
 } from './constants/gradient-constants';
-import messages from './translations/messages';
+import messages, { MessagesContext } from './translations/messages';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
-
-export const MessagesContext = React.createContext({});
 
 function App() {
   const [colors, setColors] = useState(defaultColors);

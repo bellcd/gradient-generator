@@ -1,8 +1,14 @@
 import Flyout from './Flyout';
 import { screen, render } from '@testing-library/react';
 import { merge as _merge } from 'lodash';
-import { defaultDegree } from './constants/gradient-constants';
+import { AppTestContainer } from './utils/test-utils';
+import { gradientWords, defaultGradientOptions } from './constants/gradient-constants';
 import userEvent from '@testing-library/user-event';
+import messages from './translations/messages';
+const {
+  ENDING_SHAPE,
+  DEGREES
+} = messages;
 
 describe('<Flyout />', () => {
   const defaultProps = {
@@ -11,13 +17,18 @@ describe('<Flyout />', () => {
       stopPositions: [0.20]
     }],
     setColors: jest.fn(),
-    degrees: defaultDegree,
-    setDegrees: jest.fn(),
     addOrRemoveStopPositionHandler: () => jest.fn(),
     stopPercentChangeHandler: () => jest.fn(),
-    deleteColor: () => jest.fn()
+    deleteColor: () => jest.fn(),
+    gradientOptions: defaultGradientOptions
   };
-  const setup = props => render(<Flyout {..._merge({}, defaultProps, props)} />);
+  const setup = props => {
+    render(
+      <AppTestContainer>
+        <Flyout {..._merge({}, defaultProps, props)} />
+      </AppTestContainer>
+    );
+  };
   describe('Flyout control button', () => {
     it('displays "close" when opened', () => {
       setup();
@@ -33,7 +44,7 @@ describe('<Flyout />', () => {
       ).toBeInTheDocument();
     });
   });
-  describe('Flyout content', () => {
+  describe.only('Flyout content', () => {
     it('displays the gradient string', () => {
       setup();
       const gradientString = 'linear-gradient(90deg, #ff0000 20%)';
@@ -41,10 +52,42 @@ describe('<Flyout />', () => {
         screen.getByText(gradientString)
       ).toBeInTheDocument()
     });
-    // TODO: implement
-    xdescribe('Gradient type', () => {
-      it('displays an appropriate <select />', () => {});
-      it('Updates the selected gradient type onChange', () => {});
+    describe('degrees', () => {
+      describe('enabled when gradient type is', () => {
+        it('linear', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR }});
+          expect(screen.getByLabelText(DEGREES).disabled).toBe(false);
+        });
+        it('conic', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC }});
+          expect(screen.getByLabelText(DEGREES).disabled).toBe(false);
+        });
+      });
+      describe('disabled when gradient type is', () => {
+        it('radial', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL }});
+          expect(screen.getByLabelText(DEGREES).disabled).toBe(true);
+        });
+      });
     });
+    describe('endingShape', () => {
+      describe('enabled when gradient type is', () => {
+        it('radial', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL, endingShape: gradientWords.CIRCLE }});
+          expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(false);
+        });
+      });
+      describe('disabled when gradient type is', () => {
+        it('linear', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR, endingShape: gradientWords.CIRCLE }});
+          expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(true);
+        });
+        it('conic', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC, endingShape: gradientWords.CIRCLE }});
+          expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(true);
+        });
+      });
+    });
+    // TODO: size, xPosition, & yPosition
   });
 });

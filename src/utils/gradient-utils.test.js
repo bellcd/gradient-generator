@@ -33,6 +33,9 @@ describe('gradient-utils', () => {
       const result = makeGradientString(colors, 100);
       expect(result).toBe('linear-gradient(100deg, #ff0000 10% 25%, #0000ff 30%, #6ecbfb, #c3df7d 95%)')
     });
+    // TODO: tests for different types of gradient strings
+      // radial
+      // conic
   });
   describe('makeGradientColorStops', () => {
     it('no stops', () => {

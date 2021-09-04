@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import { MessagesContext } from './App';
+import { MessagesContext } from './translations/messages';
 
 const StopPositions = ({
   colorObj,

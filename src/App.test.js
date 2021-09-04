@@ -2,6 +2,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import { merge as _merge } from 'lodash';
 import userEvent from '@testing-library/user-event';
+import { gradientWords, defaultGradientOptions } from './constants/gradient-constants';
+import messages from './translations/messages';
+const {
+  GRADIENT_TYPE
+} = messages;
 
 describe('<App />', () => {
   const defaultProps = {};
@@ -57,17 +62,37 @@ describe('<App />', () => {
       expect(screen.getAllByText(/color-[0-9]/)).toHaveLength(4);
     });
   });
-  describe('Degrees', () => {
-    it('displays an appropriate <input />', () => {
-      setup();
-      expect(screen.getByLabelText('degrees')).toBeInTheDocument();
-      expect(screen.getByDisplayValue('90')).toBeInTheDocument();
+  // TODO: adds tests for each input type
+  // TODO: size, xPosition, & yPosition
+    // exists
+    // disabled or not, handled in Flyout tests
+    // click handler functions correctly
+  describe('gradient options', () => {
+    describe('gradient type', () => {
+      it('displays an appropriate <input />', () => {
+        setup();
+        expect(screen.getByLabelText(GRADIENT_TYPE)).toBeInTheDocument();
+        expect(screen.getByDisplayValue(gradientWords.LINEAR)).toBeInTheDocument();
+      });
+      it('Updates the gradient type onChange', () => {
+        setup();
+        const gradientTypeInput = screen.getByDisplayValue(gradientWords.LINEAR);
+        fireEvent.change(gradientTypeInput, { target: { value: gradientWords.RADIAL }});
+        expect(screen.getByDisplayValue(gradientWords.RADIAL)).toBeInTheDocument();
+      });
     });
-    it('Updates the degree onChange', () => {
-      setup();
-      const degreeInput = screen.getByDisplayValue('90');
-      fireEvent.change(degreeInput, { target: { value: '91' }});
-      expect(screen.getByDisplayValue('91')).toBeInTheDocument();
+    describe('degrees', () => {
+      it('displays an appropriate <input />', () => {
+        setup();
+        expect(screen.getByLabelText(gradientWords.DEGREES)).toBeInTheDocument();
+        expect(screen.getByDisplayValue(defaultGradientOptions.degrees)).toBeInTheDocument();
+      });
+      it('Updates the degrees onChange', () => {
+        setup();
+        const degreeInput = screen.getByDisplayValue(defaultGradientOptions.degrees);
+        fireEvent.change(degreeInput, { target: { value: '91' }});
+        expect(screen.getByDisplayValue('91')).toBeInTheDocument();
+      });
     });
   });
 });

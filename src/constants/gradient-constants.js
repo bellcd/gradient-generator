@@ -25,13 +25,15 @@ export const gradientWords = {
   ENDING_SHAPE: 'ending-shape',
   SIZE: 'size',
   X_POSITION: 'x-position',
-  Y_POSITION: 'y-position'
+  Y_POSITION: 'y-position',
+  GRADIENT_TYPE: 'gradient-type',
+  CIRCLE: 'circle',
 }
 
 export const defaultGradientOptions = {
   gradientType: gradientWords.LINEAR,
   degrees: 90,
-  endingShape: 'circle',
+  endingShape: gradientWords.CIRCLE,
   size: 'closest-side',
   xPosition: 0.50,
   yPosition: 0.50,
