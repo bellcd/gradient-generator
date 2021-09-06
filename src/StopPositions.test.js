@@ -1,7 +1,14 @@
 import StopPositions from "./StopPositions";
 import { screen, render } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
+import { AppTestContainer } from './utils/test-utils';
 import { merge as _merge } from 'lodash';
+import messages from './translations/messages';
+const {
+  ADD,
+  FIRST,
+  SECOND
+} = messages;
 
 describe('<StopPositions />', () => {
   const colorObj = {
@@ -21,9 +28,11 @@ describe('<StopPositions />', () => {
 
   const setup = props => {
     render(
-      <StopPositions
-        {..._merge({}, defaultProps, props)}
-      />
+      <AppTestContainer>
+        <StopPositions
+          {..._merge({}, defaultProps, props)}
+        />
+      </AppTestContainer>
     );
   };
 
@@ -33,7 +42,7 @@ describe('<StopPositions />', () => {
     });
     it('Add button is enabled when 0 stop positions are present', () => {
       setup();
-      const addButton = screen.getByText('Add');
+      const addButton = screen.getByText(ADD);
       expect(addButton).toBeInTheDocument();
       userEvent.click(addButton);
       expect(addOrRemoveStopPositionHandlerMock).toHaveBeenCalledTimes(1);
@@ -42,7 +51,7 @@ describe('<StopPositions />', () => {
       setup({
         colorObj: { stopPositions: [0.10] }
       });
-      const addButton = screen.getByText('Add');
+      const addButton = screen.getByText(ADD);
       expect(addButton).toBeInTheDocument();
       userEvent.click(addButton);
       expect(addOrRemoveStopPositionHandlerMock).toHaveBeenCalledTimes(1);
@@ -51,7 +60,7 @@ describe('<StopPositions />', () => {
       setup({
         colorObj: { stopPositions: [0.10, 0.25] }
       });
-      const addButton = screen.getByText('Add');
+      const addButton = screen.getByText(ADD);
       expect(addButton).toBeInTheDocument();
       userEvent.click(addButton);
       expect(addOrRemoveStopPositionHandlerMock).toHaveBeenCalledTimes(0);
@@ -62,7 +71,7 @@ describe('<StopPositions />', () => {
       setup();
       const input = screen.queryByTestId('stop-position-1-color-0');
       expect(input).toBeNull();
-      const label = screen.queryByLabelText('1st');
+      const label = screen.queryByLabelText(FIRST);
       expect(label).toBeNull();
       const button = screen.queryByRole('button', { name: 'x' });
       expect(button).toBeNull();
@@ -73,7 +82,7 @@ describe('<StopPositions />', () => {
       });
       const input = screen.getByTestId('stop-position-0-color-0');
       expect(input).toBeInTheDocument();
-      const label = screen.getByLabelText('1st');
+      const label = screen.getByLabelText(FIRST);
       expect(label).toBeInTheDocument();
       const button = screen.getByRole('button', { name: 'x' });
       expect(button).toBeInTheDocument();
@@ -84,12 +93,12 @@ describe('<StopPositions />', () => {
       });
       const input1 = screen.getByTestId('stop-position-0-color-0');
       expect(input1).toBeInTheDocument();
-      const label1 = screen.getByLabelText('1st');
+      const label1 = screen.getByLabelText(FIRST);
       expect(label1).toBeInTheDocument();
 
       const input2 = screen.getByTestId('stop-position-1-color-0');
       expect(input2).toBeInTheDocument();
-      const label2 = screen.getByLabelText('2nd');
+      const label2 = screen.getByLabelText(SECOND);
       expect(label2).toBeInTheDocument();
 
       const buttons = screen.getAllByRole('button', { name: 'x' });
