@@ -89,8 +89,6 @@ const Flyout = ({
           >
             {ADD_A_RANDOM_COLOR}
           </button>
-
-          {/* TODO: add tests */}
           <div>
             <label htmlFor={gradientWords.GRADIENT_TYPE}>{GRADIENT_TYPE}</label>
             <select

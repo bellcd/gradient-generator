@@ -1,7 +1,6 @@
 import { gradientWords } from "../constants/gradient-constants";
 const { LINEAR, RADIAL, CONIC } = gradientWords;
 
-// TODO: update tests
 export const makeGradientString = (colors, {
   gradientType,
   degrees,
@@ -10,16 +9,13 @@ export const makeGradientString = (colors, {
   xPosition,
   yPosition
 }) => {
-  const colorString = colors.reduce((acc, colorObj, i) => {
-    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
-  }, '');
-
+  const colorString = combineGradientColorStops(colors);
   let gradientString;
+
   if (gradientType === LINEAR) {
     gradientString = `${LINEAR}-gradient(${degrees}deg, ${colorString})`;
   } else if (gradientType === RADIAL) {
     // TODO: improvement, allow using keywords (several spots)
-    // TODO: add tests around radial gradients
     // radial-gradient
       // [ <ending-shape> || <size> ]? [ at <position> ]?, <color-stop-list>
       // [ <ending-shape> || <size> ]? [ at <position> ]? ,<color-stop-list>
@@ -29,12 +25,17 @@ export const makeGradientString = (colors, {
       // if ellipse
         // <size> must be two percents, cannot be negative
     gradientString = `${RADIAL}-gradient(${endingShape} ${size} at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
-
   } else if (gradientType === CONIC) {
     gradientString = `${CONIC}-gradient(from ${degrees}deg at ${Math.round(xPosition * 100)}% ${Math.round(yPosition * 100)}%, ${colorString})`;
   }
 
   return gradientString;
+};
+
+export const combineGradientColorStops = colors => {
+  return colors.reduce((acc, colorObj, i) => {
+    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
+  }, '');
 };
 
 export const makeGradientColorStops = colorObj => {
