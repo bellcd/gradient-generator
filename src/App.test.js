@@ -5,7 +5,13 @@ import userEvent from '@testing-library/user-event';
 import { gradientWords, defaultGradientOptions } from './constants/gradient-constants';
 import messages from './translations/messages';
 const {
-  GRADIENT_TYPE
+  GRADIENT_TYPE,
+  DEGREES,
+  ENDING_SHAPE,
+  CIRCLE,
+  SIZE,
+  X_POSITION,
+  Y_POSITION
 } = messages;
 
 describe('<App />', () => {
@@ -62,36 +68,86 @@ describe('<App />', () => {
       expect(screen.getAllByText(/color-[0-9]/)).toHaveLength(4);
     });
   });
-  // TODO: adds tests for each input type
-  // TODO: size, xPosition, & yPosition
-    // exists
-    // disabled or not, handled in Flyout tests
-    // click handler functions correctly
   describe('gradient options', () => {
-    describe('gradient type', () => {
-      it('displays an appropriate <input />', () => {
+    describe('gradientType', () => {
+      it('displays an appropriate <select />', () => {
         setup();
         expect(screen.getByLabelText(GRADIENT_TYPE)).toBeInTheDocument();
         expect(screen.getByDisplayValue(gradientWords.LINEAR)).toBeInTheDocument();
       });
       it('Updates the gradient type onChange', () => {
         setup();
-        const gradientTypeInput = screen.getByDisplayValue(gradientWords.LINEAR);
+        const gradientTypeInput = screen.getByLabelText(GRADIENT_TYPE);
+        expect(gradientTypeInput.value).toBe(defaultGradientOptions.gradientType);
         fireEvent.change(gradientTypeInput, { target: { value: gradientWords.RADIAL }});
-        expect(screen.getByDisplayValue(gradientWords.RADIAL)).toBeInTheDocument();
+        expect(gradientTypeInput.value).toBe(gradientWords.RADIAL);
       });
     });
     describe('degrees', () => {
       it('displays an appropriate <input />', () => {
         setup();
-        expect(screen.getByLabelText(gradientWords.DEGREES)).toBeInTheDocument();
+        expect(screen.getByLabelText(DEGREES)).toBeInTheDocument();
         expect(screen.getByDisplayValue(defaultGradientOptions.degrees)).toBeInTheDocument();
       });
       it('Updates the degrees onChange', () => {
         setup();
-        const degreeInput = screen.getByDisplayValue(defaultGradientOptions.degrees);
+        const degreeInput = screen.getByLabelText(DEGREES);
         fireEvent.change(degreeInput, { target: { value: '91' }});
         expect(screen.getByDisplayValue('91')).toBeInTheDocument();
+      });
+    });
+    describe('endingShape', () => {
+      it('displays an appropriate <select />', () => {
+        setup();
+        expect(screen.getByLabelText(ENDING_SHAPE)).toBeInTheDocument();
+        expect(screen.getByDisplayValue(CIRCLE)).toBeInTheDocument();
+      });
+      it('Updates the endingShape onChange', () => {
+        setup();
+        const endingShapeSelect = screen.getByLabelText(ENDING_SHAPE);
+        expect(endingShapeSelect.value).toBe(gradientWords.CIRCLE);
+        fireEvent.change(endingShapeSelect, { target: { value: gradientWords.ELLIPSE }});
+        expect(endingShapeSelect.value).toBe(gradientWords.ELLIPSE);
+      });
+    });
+    describe('size', () => {
+      it('displays an appropriate <select />', () => {
+        setup();
+        expect(screen.getByLabelText(SIZE)).toBeInTheDocument();
+        expect(screen.getByDisplayValue(defaultGradientOptions.size)).toBeInTheDocument();
+      });
+      it('Updates the size onChange', () => {
+        setup();
+        const sizeSelect = screen.getByLabelText(SIZE);
+        expect(sizeSelect.value).toBe(defaultGradientOptions.size);
+        fireEvent.change(sizeSelect, { target: { value: gradientWords.FARTHEST_SIDE }});
+        expect(sizeSelect.value).toBe(gradientWords.FARTHEST_SIDE);
+      });
+    });
+    describe('xPosition', () => {
+      it('displays an appropriate <input />', () => {
+        setup();
+        expect(screen.getByLabelText(X_POSITION)).toBeInTheDocument();
+        expect(screen.getByLabelText(X_POSITION).value).toBe(String(Math.round(defaultGradientOptions.xPosition * 100)));
+      });
+      it('Updates the xPosition onChange', () => {
+        setup();
+        const xPositionInput = screen.getByLabelText(X_POSITION);
+        fireEvent.change(xPositionInput, { target: { value: 46 }});
+        expect(screen.getByDisplayValue(Math.round(0.46 * 100))).toBeInTheDocument();
+      });
+    });
+    describe('yPosition', () => {
+      it('displays an appropriate <input />', () => {
+        setup();
+        expect(screen.getByLabelText(Y_POSITION)).toBeInTheDocument();
+        expect(screen.getByLabelText(Y_POSITION).value).toBe(String(Math.round(defaultGradientOptions.yPosition * 100)));
+      });
+      it('Updates the yPosition onChange', () => {
+        setup();
+        const yPositionInput = screen.getByLabelText(Y_POSITION);
+        fireEvent.change(yPositionInput, { target: { value: 46 }});
+        expect(screen.getByDisplayValue(Math.round(0.46 * 100))).toBeInTheDocument();
       });
     });
   });

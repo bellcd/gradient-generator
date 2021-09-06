@@ -7,7 +7,10 @@ import userEvent from '@testing-library/user-event';
 import messages from './translations/messages';
 const {
   ENDING_SHAPE,
-  DEGREES
+  DEGREES,
+  SIZE,
+  X_POSITION,
+  Y_POSITION
 } = messages;
 
 describe('<Flyout />', () => {
@@ -44,7 +47,7 @@ describe('<Flyout />', () => {
       ).toBeInTheDocument();
     });
   });
-  describe.only('Flyout content', () => {
+  describe('Flyout content', () => {
     it('displays the gradient string', () => {
       setup();
       const gradientString = 'linear-gradient(90deg, #ff0000 20%)';
@@ -73,21 +76,74 @@ describe('<Flyout />', () => {
     describe('endingShape', () => {
       describe('enabled when gradient type is', () => {
         it('radial', () => {
-          setup({ gradientOptions: { gradientType: gradientWords.RADIAL, endingShape: gradientWords.CIRCLE }});
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL }});
           expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(false);
         });
       });
       describe('disabled when gradient type is', () => {
         it('linear', () => {
-          setup({ gradientOptions: { gradientType: gradientWords.LINEAR, endingShape: gradientWords.CIRCLE }});
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR }});
           expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(true);
         });
         it('conic', () => {
-          setup({ gradientOptions: { gradientType: gradientWords.CONIC, endingShape: gradientWords.CIRCLE }});
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC }});
           expect(screen.getByLabelText(ENDING_SHAPE).disabled).toBe(true);
         });
       });
     });
-    // TODO: size, xPosition, & yPosition
+    describe('size', () => {
+      describe('enabled when gradient type is', () => {
+        it('radial', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL }});
+          expect(screen.getByLabelText(SIZE).disabled).toBe(false);
+        });
+      });
+      describe('disabled when gradient type is', () => {
+        it('linear', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR }});
+          expect(screen.getByLabelText(SIZE).disabled).toBe(true);
+        });
+        it('conic', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC }});
+          expect(screen.getByLabelText(SIZE).disabled).toBe(true);
+        });
+      });
+    });
+    describe('xPosition', () => {
+      describe('enabled when gradient type is', () => {
+        it('radial', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL }});
+          expect(screen.getByLabelText(X_POSITION).disabled).toBe(false);
+        });
+        it('conic', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC }});
+          expect(screen.getByLabelText(X_POSITION).disabled).toBe(false);
+        });
+      });
+      describe('disabled when gradient type is', () => {
+        it('linear', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR }});
+          expect(screen.getByLabelText(X_POSITION).disabled).toBe(true);
+        });
+      });
+    });
+    describe('yPosition', () => {
+      describe('enabled when gradient type is', () => {
+        it('radial', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.RADIAL }});
+          expect(screen.getByLabelText(Y_POSITION).disabled).toBe(false);
+        });
+        it('conic', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.CONIC }});
+          expect(screen.getByLabelText(Y_POSITION).disabled).toBe(false);
+        });
+      });
+      describe('disabled when gradient type is', () => {
+        it('linear', () => {
+          setup({ gradientOptions: { gradientType: gradientWords.LINEAR }});
+          expect(screen.getByLabelText(Y_POSITION).disabled).toBe(true);
+        });
+      });
+    });
   });
 });

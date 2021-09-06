@@ -26,7 +26,7 @@ describe('<Color />', () => {
   });
   it('displays a delete button', () => {
     setup();
-    expect(screen.getAllByRole('button', { name: 'x' })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: 'x' })).toHaveLength(1);
     expect(screen.getByTestId('color-0-delete-button')).toBeInTheDocument();
   });
 });

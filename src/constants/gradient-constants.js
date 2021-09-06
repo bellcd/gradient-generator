@@ -28,13 +28,18 @@ export const gradientWords = {
   Y_POSITION: 'y-position',
   GRADIENT_TYPE: 'gradient-type',
   CIRCLE: 'circle',
+  ELLIPSE: 'ellipse',
+  CLOSEST_SIDE: 'closest-side',
+  FARTHEST_SIDE: 'farthest-side',
+  CLOSEST_CORNER: 'closest-corner',
+  FARTHEST_CORNER: 'farthest-corner',
 }
 
 export const defaultGradientOptions = {
   gradientType: gradientWords.LINEAR,
   degrees: 90,
   endingShape: gradientWords.CIRCLE,
-  size: 'closest-side',
+  size: gradientWords.CLOSEST_SIDE,
   xPosition: 0.50,
   yPosition: 0.50,
 };
