@@ -113,8 +113,6 @@ export default App;
   // github actions
     // when a PR into main is merged
       // run the "yarn deploy" command
-    // when a PR into main is opened
-      // run the test suite
   // store environment variables in config file
   // input validation <<< NEXT
     // type the color
