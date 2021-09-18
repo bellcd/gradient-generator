@@ -10,11 +10,7 @@ import { makeGradientString } from './utils/gradient-utils';
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
-  // const [degrees, setDegrees] = useState(defaultDegree);
-  // const [gradientType, setGradientType] = useState(defaultGradientType);
   const [gradientOptions, setGradientOptions] = useState(defaultGradientOptions);
-
-  // const gradientString = makeGradientString(gradientType, colors, degrees);
   const gradientString = makeGradientString(colors, gradientOptions);
 
   const makeRandomPercentInRange = (min, max) => {
@@ -92,15 +88,11 @@ function App() {
     <MessagesContext.Provider value={messages}>
       <div className="wrapper">
         <Flyout
-          // degrees={degrees}
           colors={colors}
           setColors={setColors}
-          // setDegrees={setDegrees}
           addOrRemoveStopPositionHandler={addOrRemoveStopPositionHandler}
           stopPercentChangeHandler={stopPercentChangeHandler}
           deleteColor={deleteColor}
-          // gradientType={gradientType}
-          // setGradientType={setGradientType}
           gradientOptions={gradientOptions}
           setGradientOptions={setGradientOptions}
         />
@@ -117,7 +109,7 @@ function App() {
 export default App;
 
 // TODOs:
-  // input validation
+  // input validation <<< NEXT
     // type the color
   // convert CSS to SCSS
   // change the color mode
@@ -125,13 +117,10 @@ export default App;
     // rgb
     // hsl
   // change the gradient mode
-    // linear
-    // radial
-    // conic
-  // add color stops
-    // identify bug with stop positions not incrementing on up / down keypress
     // repeating-linear-gradient
     // repeating-radial-gradient
+  // add color stops
+    // identify bug with stop positions not incrementing on up / down keypress
   // add color hints
     // only valid between color stops
   // inputs
