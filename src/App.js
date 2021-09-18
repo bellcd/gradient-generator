@@ -111,8 +111,9 @@ export default App;
 // TODOs:
   // test suite against the production build
   // github actions
-    // when a PR gets merged into main, I want
-      // I want to run the "yarn deploy" command
+    // when a PR into main is merged
+      // run the "yarn deploy" command
+  // store environment variables in config file
   // input validation <<< NEXT
     // type the color
   // convert CSS to SCSS
