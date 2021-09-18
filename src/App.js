@@ -109,6 +109,10 @@ function App() {
 export default App;
 
 // TODOs:
+  // test suite against the production build
+  // github actions
+    // when a PR gets merged into main, I want
+      // I want to run the "yarn deploy" command
   // input validation <<< NEXT
     // type the color
   // convert CSS to SCSS
