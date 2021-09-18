@@ -1,7 +1,7 @@
-name: pr-open
+name: run-tests
 on: [pull_request]
 jobs:
-  run-test-suite:
+  unit-tests:
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
