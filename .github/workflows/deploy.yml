@@ -11,6 +11,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - run: git config --global user.email "ChristianDibalaBell@gmail.com"
+      - run: git config --global user.name "Christian Bell"
       - run: yarn
       - run: yarn test
       - run: yarn add gh-pages
