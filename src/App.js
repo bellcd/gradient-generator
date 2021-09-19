@@ -108,7 +108,6 @@ function App() {
 
 export default App;
 
-// testing change for status check
 // TODOs:
   // test suite against the production build
   // github actions
