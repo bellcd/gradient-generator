@@ -8,6 +8,8 @@ jobs:
   deploy:
     runs-on: macos-11
     steps:
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -18,5 +20,3 @@ jobs:
       - run: yarn test
       - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       - run: yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
