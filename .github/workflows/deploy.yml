@@ -15,5 +15,8 @@ jobs:
       - run: git config --global user.name "Christian Bell"
       - run: yarn
       - run: yarn test
-      - run: yarn add gh-pages
-      - run: yarn deploy
+      - run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
