@@ -109,23 +109,14 @@ function App() {
 export default App;
 
 // TODOs:
-  // test suite against the production build
-  // github actions
-    // when a PR into main is merged
-      // run the "yarn deploy" command
-  // verify that comment in index file shows up in production
   // input validation <<< NEXT
     // type the color
-  // convert CSS to SCSS
-  // change the color mode
-    // hexademical
-    // rgb
-    // hsl
+  // convert CSS to SCSS, might do styled components instead, not sure yet
   // change the gradient mode
     // repeating-linear-gradient
     // repeating-radial-gradient
   // add color stops
-    // identify bug with stop positions not incrementing on up / down keypress
+    // color stop values can up / down arrow out of range, when there are other color stops present
   // add color hints
     // only valid between color stops
   // inputs
