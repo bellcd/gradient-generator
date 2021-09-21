@@ -113,7 +113,7 @@ export default App;
   // github actions
     // when a PR into main is merged
       // run the "yarn deploy" command
-  // store environment variables in config file
+  // verify that comment in index file shows up in production
   // input validation <<< NEXT
     // type the color
   // convert CSS to SCSS
