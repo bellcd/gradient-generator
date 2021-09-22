@@ -1,5 +1,4 @@
-import { useState, useContext } from 'react';
-import classnames from 'classnames';
+import { useState, useContext, useRef, useEffect } from 'react';
 import './Flyout.css';
 import {
   randomColorGenerator,
@@ -7,7 +6,7 @@ import {
 } from './utils/gradient-utils';
 import { gradientWords } from './constants/gradient-constants';
 import Colors from './Colors';
-import classNames from 'classnames';
+import { throttle as _throttle } from 'lodash';
 import { MessagesContext } from './translations/messages';
 
 const Flyout = ({
@@ -17,11 +16,9 @@ const Flyout = ({
   stopPercentChangeHandler,
   deleteColor,
   gradientOptions,
-  setGradientOptions
+  setGradientOptions,
 }) => {
   const {
-    CLOSE,
-    OPEN,
     ADD_A_RANDOM_COLOR,
     GRADIENT_TYPE,
     LINEAR,
@@ -40,7 +37,12 @@ const Flyout = ({
     Y_POSITION
   } = useContext(MessagesContext);
 
-  const [isFlyoutOpen, setIsFlyoutOpen] = useState(true);
+  const resizingRef = useRef(false);
+  const [width, setWidth] = useState(0);
+  
+  useEffect(() => {
+    setWidth(document.querySelector('.wrapper').clientWidth / 2);
+  }, []);
 
   const inputChangeHandler = i => event => {
     setColors(
@@ -53,21 +55,38 @@ const Flyout = ({
 
   const gradientString = makeGradientString(colors, gradientOptions);
 
-  const onFlyoutButtonClick = () => setIsFlyoutOpen(!isFlyoutOpen);
+  // TODO: feature is only available on desktop
+  const calculateAndSetWidth = event => {
+    if (!resizingRef.current) return;
+    setWidth(event.clientX);
+  };
+
+  const cleanup = () => {
+    if (!resizingRef.current) return;
+    resizingRef.current = false;
+  }
+
+  useEffect(() => {
+    const throttledCalculateAndSetWidth = _throttle(calculateAndSetWidth, 100);
+    document.addEventListener('mousemove', throttledCalculateAndSetWidth);
+    document.addEventListener('mouseup', cleanup);
+    return () => {
+      document.removeEventListener('mousemove', throttledCalculateAndSetWidth);
+      document.removeEventListener('mouseup', cleanup);
+    };
+  }, [])
 
   return (
-    <div className={classnames('flyout', {
-      'flyout--open': isFlyoutOpen,
-      'flyout--closed': !isFlyoutOpen
-    })}>
+    <div
+      className="flyout"
+      style={{ width }}
+    >
       <button
-        className={classNames('flyout__control-button', {
-          'flyout__control-button--open': isFlyoutOpen,
-          'flyout__control-button--closed': !isFlyoutOpen,
-        })}
-        onClick={onFlyoutButtonClick}
+        className="flyout__control-button"
+        onMouseDown={() => resizingRef.current = true}
+        // TODO: improvement, SASS for 3rem should really be a variable
+        style={{ left: `calc(${width}px)` }}
       >
-        {isFlyoutOpen ? CLOSE : OPEN}
       </button>
       <div className="flyout__content">
         <div className="card">{gradientString}</div>

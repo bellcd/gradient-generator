@@ -109,7 +109,10 @@ function App() {
 export default App;
 
 // TODOs:
-  // input validation <<< NEXT
+  // toast notifications
+  // flyout control
+    // add resizeable handle tests
+  // input validation
     // type the color
   // convert CSS to SCSS, might do styled components instead, not sure yet
   // change the gradient mode
