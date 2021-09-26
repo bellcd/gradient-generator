@@ -5,6 +5,7 @@ import {
   makeGradientString
 } from './utils/gradient-utils';
 import { gradientWords } from './constants/gradient-constants';
+import breakpoints from './constants/breakpoints';
 import Colors from './Colors';
 import { throttle as _throttle } from 'lodash';
 import { MessagesContext } from './translations/messages';
@@ -37,11 +38,13 @@ const Flyout = ({
     Y_POSITION
   } = useContext(MessagesContext);
 
-  const resizingRef = useRef(false);
+  const resizingRef = useRef({ isResizing: false, maxFlyoutWidth: 0 });
   const [width, setWidth] = useState(0);
   
   useEffect(() => {
-    setWidth(document.querySelector('.wrapper').clientWidth / 2);
+    const wrapperWidth = document.querySelector('.wrapper').clientWidth;
+    setWidth(Math.max(wrapperWidth / 2, breakpoints.mobile));
+    resizingRef.current.maxFlyoutWidth = wrapperWidth * 0.80;
   }, []);
 
   const inputChangeHandler = i => event => {
@@ -55,15 +58,16 @@ const Flyout = ({
 
   const gradientString = makeGradientString(colors, gradientOptions);
 
-  // TODO: feature is only available on desktop
   const calculateAndSetWidth = event => {
-    if (!resizingRef.current) return;
+    if (!resizingRef.current.isResizing) return;
+    if (event.clientX < breakpoints.mobile) return;
+    if (event.clientX > resizingRef.current.maxFlyoutWidth) return;
     setWidth(event.clientX);
   };
 
   const cleanup = () => {
-    if (!resizingRef.current) return;
-    resizingRef.current = false;
+    if (!resizingRef.current.isResizing) return;
+    resizingRef.current.isResizing = false;
   }
 
   useEffect(() => {
@@ -84,7 +88,7 @@ const Flyout = ({
     >
       <button
         className="flyout__control-button"
-        onMouseDown={() => resizingRef.current = true}
+        onMouseDown={() => resizingRef.current.isResizing = true}
         style={{ left: `calc(${width}px)` }}
         data-testid="flyout__control-button"
       >

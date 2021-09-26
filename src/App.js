@@ -110,8 +110,6 @@ export default App;
 
 // TODOs:
   // toast notifications
-  // flyout control
-    // add resizeable handle tests
   // input validation
     // type the color
   // convert CSS to SCSS, might do styled components instead, not sure yet

@@ -33,10 +33,17 @@ describe('<Flyout />', () => {
       </AppTestContainer>
     );
   };
-  describe('width', () => {
-    it('defaults to half the available wrapper width', () => {
+  describe('width defaults to', () => {
+    it('half the available wrapper width on large screens', () => {
       const querySelectorSpy = jest.spyOn(document, 'querySelector');
       querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
+      setup();
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
+      querySelectorSpy.mockRestore();
+    });
+    it('the minimum mobile breakpoint on smaller screens', () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 600 });
       setup();
       expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
       querySelectorSpy.mockRestore();
@@ -53,6 +60,24 @@ describe('<Flyout />', () => {
       fireEvent.mouseUp(document);
       fireEvent.mouseMove(document, { clientX: 1000 });
       expect(screen.getByTestId('flyout').style['_values'].width).toBe('700px');
+      querySelectorSpy.mockRestore();
+    });
+    it('does not update width to be less than mobile breakpoint', () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
+      setup();
+      fireEvent.mouseDown(screen.getByTestId('flyout__control-button'));
+      fireEvent.mouseMove(document, { clientX: 200 });
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
+      querySelectorSpy.mockRestore();
+    });
+    it('does not update width to be greater than 80% of the wrapper width', () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
+      setup();
+      fireEvent.mouseDown(screen.getByTestId('flyout__control-button'));
+      fireEvent.mouseMove(document, { clientX: 900 });
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
       querySelectorSpy.mockRestore();
     });
   });
