@@ -9,6 +9,7 @@ import breakpoints from './constants/breakpoints';
 import Colors from './Colors';
 import { throttle as _throttle } from 'lodash';
 import { MessagesContext } from './translations/messages';
+import { MAX_FLYOUT_WIDTH_PERCENT, FLYOUT_WIDTH_THROTTLE } from './constants/flyout-constants';
 
 const Flyout = ({
   colors,
@@ -44,7 +45,12 @@ const Flyout = ({
   useEffect(() => {
     const wrapperWidth = document.querySelector('.wrapper').clientWidth;
     setWidth(Math.max(wrapperWidth / 2, breakpoints.mobile));
-    resizingRef.current.maxFlyoutWidth = wrapperWidth * 0.80;
+    resizingRef.current.maxFlyoutWidth = wrapperWidth * MAX_FLYOUT_WIDTH_PERCENT;
+    const throttledHandleResize = _throttle(() => {
+      resizingRef.current.maxFlyoutWidth = Math.max(window.innerWidth * MAX_FLYOUT_WIDTH_PERCENT, breakpoints.mobile);
+    }, FLYOUT_WIDTH_THROTTLE);
+    window.addEventListener('resize', throttledHandleResize);
+    return throttledHandleResize;
   }, []);
 
   const inputChangeHandler = i => event => {
@@ -71,7 +77,7 @@ const Flyout = ({
   }
 
   useEffect(() => {
-    const throttledCalculateAndSetWidth = _throttle(calculateAndSetWidth, 100);
+    const throttledCalculateAndSetWidth = _throttle(calculateAndSetWidth, FLYOUT_WIDTH_THROTTLE);
     document.addEventListener('mousemove', throttledCalculateAndSetWidth);
     document.addEventListener('mouseup', cleanup);
     return () => {

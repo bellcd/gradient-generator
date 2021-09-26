@@ -3,6 +3,7 @@ import { screen, render, fireEvent } from '@testing-library/react';
 import { merge as _merge } from 'lodash';
 import { AppTestContainer } from './utils/test-utils';
 import { gradientWords, defaultGradientOptions } from './constants/gradient-constants';
+import { MAX_FLYOUT_WIDTH_PERCENT } from './constants/flyout-constants';
 import messages from './translations/messages';
 const {
   ENDING_SHAPE,
@@ -71,14 +72,29 @@ describe('<Flyout />', () => {
       expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
       querySelectorSpy.mockRestore();
     });
-    it('does not update width to be greater than 80% of the wrapper width', () => {
+    it(`does not update width to be greater than ${MAX_FLYOUT_WIDTH_PERCENT} of the wrapper width`, () => {
       const querySelectorSpy = jest.spyOn(document, 'querySelector');
       querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
       setup();
       fireEvent.mouseDown(screen.getByTestId('flyout__control-button'));
-      fireEvent.mouseMove(document, { clientX: 900 });
+      fireEvent.mouseMove(document, { clientX: 950 });
       expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
       querySelectorSpy.mockRestore();
+    });
+    it(`sets the width correctly after resize events on the window`, () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
+      const defaultInnerWidth = window.innerWidth;
+      window.innerWidth = 1000;
+      setup();
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
+      window.innerWidth = 950;
+      fireEvent(window, new Event('resize'));
+      fireEvent.mouseDown(screen.getByTestId('flyout__control-button'));
+      fireEvent.mouseMove(document, { clientX: 850 });
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('850px');
+      querySelectorSpy.mockRestore();
+      window.innerWidth = defaultInnerWidth;
     });
   });
   describe('Flyout content', () => {
