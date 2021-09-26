@@ -1,9 +1,8 @@
 import Flyout from './Flyout';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import { merge as _merge } from 'lodash';
 import { AppTestContainer } from './utils/test-utils';
 import { gradientWords, defaultGradientOptions } from './constants/gradient-constants';
-import userEvent from '@testing-library/user-event';
 import messages from './translations/messages';
 const {
   ENDING_SHAPE,
@@ -28,23 +27,33 @@ describe('<Flyout />', () => {
   const setup = props => {
     render(
       <AppTestContainer>
-        <Flyout {..._merge({}, defaultProps, props)} />
+        <div className="wrapper">
+          <Flyout {..._merge({}, defaultProps, props)} />
+        </div>
       </AppTestContainer>
     );
   };
-  describe('Flyout control button', () => {
-    it('displays "close" when opened', () => {
+  describe('width', () => {
+    it('defaults to half the available wrapper width', () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
       setup();
-      expect(
-        screen.getByRole('button', { name: 'close' })
-      ).toBeInTheDocument();
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('500px');
+      querySelectorSpy.mockRestore();
     });
-    it('displays "open" when closed', () => {
+  });
+  describe('Flyout control button', () => {
+    it('updates the flyout width only while dragging', () => {
+      const querySelectorSpy = jest.spyOn(document, 'querySelector');
+      querySelectorSpy.mockReturnValueOnce({ clientWidth: 1000 });
       setup();
-      userEvent.click(screen.getByRole('button', { name: 'close' }))
-      expect(
-        screen.getByRole('button', { name: 'open' })
-      ).toBeInTheDocument();
+      fireEvent.mouseDown(screen.getByTestId('flyout__control-button'));
+      fireEvent.mouseMove(document, { clientX: 700 });
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('700px');
+      fireEvent.mouseUp(document);
+      fireEvent.mouseMove(document, { clientX: 1000 });
+      expect(screen.getByTestId('flyout').style['_values'].width).toBe('700px');
+      querySelectorSpy.mockRestore();
     });
   });
   describe('Flyout content', () => {

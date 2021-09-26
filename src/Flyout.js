@@ -80,12 +80,13 @@ const Flyout = ({
     <div
       className="flyout"
       style={{ width }}
+      data-testid="flyout"
     >
       <button
         className="flyout__control-button"
         onMouseDown={() => resizingRef.current = true}
-        // TODO: improvement, SASS for 3rem should really be a variable
         style={{ left: `calc(${width}px)` }}
+        data-testid="flyout__control-button"
       >
       </button>
       <div className="flyout__content">
