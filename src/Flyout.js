@@ -1,14 +1,15 @@
-import { useState, useContext } from 'react';
-import classnames from 'classnames';
+import { useState, useContext, useRef, useEffect } from 'react';
 import './Flyout.css';
 import {
   randomColorGenerator,
   makeGradientString
 } from './utils/gradient-utils';
 import { gradientWords } from './constants/gradient-constants';
+import breakpoints from './constants/breakpoints';
 import Colors from './Colors';
-import classNames from 'classnames';
-import { MessagesContext } from './translations/messages';
+import { throttle as _throttle } from 'lodash';
+import messages, { MessagesContext } from './translations/messages';
+import { MAX_FLYOUT_WIDTH_PERCENT, FLYOUT_WIDTH_THROTTLE } from './constants/flyout-constants';
 
 const Flyout = ({
   colors,
@@ -17,11 +18,9 @@ const Flyout = ({
   stopPercentChangeHandler,
   deleteColor,
   gradientOptions,
-  setGradientOptions
+  setGradientOptions,
 }) => {
   const {
-    CLOSE,
-    OPEN,
     ADD_A_RANDOM_COLOR,
     GRADIENT_TYPE,
     LINEAR,
@@ -40,7 +39,19 @@ const Flyout = ({
     Y_POSITION
   } = useContext(MessagesContext);
 
-  const [isFlyoutOpen, setIsFlyoutOpen] = useState(true);
+  const resizingRef = useRef({ isResizing: false, maxFlyoutWidth: 0 });
+  const [width, setWidth] = useState(0);
+  
+  useEffect(() => {
+    const wrapperWidth = document.querySelector('.wrapper').clientWidth;
+    setWidth(Math.max(wrapperWidth / 2, breakpoints.mobile));
+    resizingRef.current.maxFlyoutWidth = wrapperWidth * MAX_FLYOUT_WIDTH_PERCENT;
+    const throttledHandleResize = _throttle(() => {
+      resizingRef.current.maxFlyoutWidth = Math.max(window.innerWidth * MAX_FLYOUT_WIDTH_PERCENT, breakpoints.mobile);
+    }, FLYOUT_WIDTH_THROTTLE);
+    window.addEventListener('resize', throttledHandleResize);
+    return throttledHandleResize;
+  }, []);
 
   const inputChangeHandler = i => event => {
     setColors(
@@ -53,21 +64,40 @@ const Flyout = ({
 
   const gradientString = makeGradientString(colors, gradientOptions);
 
-  const onFlyoutButtonClick = () => setIsFlyoutOpen(!isFlyoutOpen);
+  const calculateAndSetWidth = event => {
+    if (!resizingRef.current.isResizing) return;
+    if (event.clientX < breakpoints.mobile) return;
+    if (event.clientX > resizingRef.current.maxFlyoutWidth) return;
+    setWidth(event.clientX);
+  };
+
+  const cleanup = () => {
+    if (!resizingRef.current.isResizing) return;
+    resizingRef.current.isResizing = false;
+  }
+
+  useEffect(() => {
+    const throttledCalculateAndSetWidth = _throttle(calculateAndSetWidth, FLYOUT_WIDTH_THROTTLE);
+    document.addEventListener('mousemove', throttledCalculateAndSetWidth);
+    document.addEventListener('mouseup', cleanup);
+    return () => {
+      document.removeEventListener('mousemove', throttledCalculateAndSetWidth);
+      document.removeEventListener('mouseup', cleanup);
+    };
+  }, [])
 
   return (
-    <div className={classnames('flyout', {
-      'flyout--open': isFlyoutOpen,
-      'flyout--closed': !isFlyoutOpen
-    })}>
+    <div
+      className="flyout"
+      style={{ width }}
+      data-testid="flyout"
+    >
       <button
-        className={classNames('flyout__control-button', {
-          'flyout__control-button--open': isFlyoutOpen,
-          'flyout__control-button--closed': !isFlyoutOpen,
-        })}
-        onClick={onFlyoutButtonClick}
+        className="flyout__control-button"
+        onMouseDown={() => resizingRef.current.isResizing = true}
+        style={{ left: `calc(${width}px)` }}
+        data-testid="flyout__control-button"
       >
-        {isFlyoutOpen ? CLOSE : OPEN}
       </button>
       <div className="flyout__content">
         <div className="card">{gradientString}</div>
@@ -194,6 +224,7 @@ const Flyout = ({
               />
             </div>
           </div>
+        <div>{messages.FULLSCREEN}</div>
         </div>
       </div>
     </div>

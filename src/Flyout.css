@@ -1,7 +1,6 @@
 .flyout {
   background-color: aliceblue;
-  transition: all 0.3s ease-out;
-  width: 20rem;
+  transition: all 50ms ease-out;
   height: 100vh;
   position: relative;
 }
@@ -10,21 +9,13 @@
   overflow: hidden;
 }
 
-.flyout--open {
-  width: 70%;
-  overflow: visible;
-}
-
-.flyout--closed {
-  width: 0;
-}
-
 .flyout__control-button {
   position: absolute;
-  top: 0;
-  right: 0;
   font-size: 1.5rem;
-  transition: all 0.3s ease-out;
+  transition: all 50ms ease-out;
+  width: 1rem;
+  height: 100vh;
+  cursor: pointer;
 }
 
 .flyout__control-button--open {

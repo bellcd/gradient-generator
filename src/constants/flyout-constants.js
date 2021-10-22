@@ -1,0 +1,2 @@
+export const MAX_FLYOUT_WIDTH_PERCENT = 0.90;
+export const FLYOUT_WIDTH_THROTTLE = 50;

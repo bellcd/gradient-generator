@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   defaultColors,
   defaultGradientOptions
@@ -12,6 +12,16 @@ function App() {
   const [colors, setColors] = useState(defaultColors);
   const [gradientOptions, setGradientOptions] = useState(defaultGradientOptions);
   const gradientString = makeGradientString(colors, gradientOptions);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  useEffect(() => {
+    const toggleFullScreen = event => {
+      if (event.key !== 'Escape') return;
+      setIsFullScreen(currentFullScreenStatus => !currentFullScreenStatus);
+    }
+    window.addEventListener('keyup', toggleFullScreen);
+    return () => window.removeEventListener('keyup', toggleFullScreen);
+  }, []);
 
   const makeRandomPercentInRange = (min, max) => {
     const minAsInteger = Math.round(min * 100);
@@ -97,10 +107,10 @@ function App() {
           setGradientOptions={setGradientOptions}
         />
         <div
-          className="gradient"
+          className={`gradient ${isFullScreen ? 'fullScreen' : '' }`}
           style={{ background: gradientString }}
-        >
-        </div>
+          data-testid="gradient"
+        />
       </div>
     </MessagesContext.Provider>
   );
@@ -109,7 +119,8 @@ function App() {
 export default App;
 
 // TODOs:
-  // input validation <<< NEXT
+  // toast notifications
+  // input validation
     // type the color
   // convert CSS to SCSS, might do styled components instead, not sure yet
   // change the gradient mode

@@ -29,6 +29,7 @@ const messages = {
     COLOR_PICKER: 'Color Picker',
     OPTIONAL_STOP_PERCENTS: 'Optional Stop Percents',
     DELETE_COLOR: 'Delete Color',
+    FULLSCREEN: `Press 'Escape' to toggle full screen mode`
 };
 
 export default messages;
