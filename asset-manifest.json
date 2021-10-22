@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/gradient-generator/static/css/main.c4753687.chunk.css",
-    "main.js": "/gradient-generator/static/js/main.4d4f6ddd.chunk.js",
-    "main.js.map": "/gradient-generator/static/js/main.4d4f6ddd.chunk.js.map",
-    "runtime-main.js": "/gradient-generator/static/js/runtime-main.2721f953.js",
-    "runtime-main.js.map": "/gradient-generator/static/js/runtime-main.2721f953.js.map",
-    "static/js/2.9de5839b.chunk.js": "/gradient-generator/static/js/2.9de5839b.chunk.js",
-    "static/js/2.9de5839b.chunk.js.map": "/gradient-generator/static/js/2.9de5839b.chunk.js.map",
-    "static/js/3.e4561e60.chunk.js": "/gradient-generator/static/js/3.e4561e60.chunk.js",
-    "static/js/3.e4561e60.chunk.js.map": "/gradient-generator/static/js/3.e4561e60.chunk.js.map",
+    "main.css": "/gradient-generator/static/css/main.98937bf1.chunk.css",
+    "main.js": "/gradient-generator/static/js/main.86cf7316.chunk.js",
+    "main.js.map": "/gradient-generator/static/js/main.86cf7316.chunk.js.map",
+    "runtime-main.js": "/gradient-generator/static/js/runtime-main.81c18a50.js",
+    "runtime-main.js.map": "/gradient-generator/static/js/runtime-main.81c18a50.js.map",
+    "static/js/2.a81abf3c.chunk.js": "/gradient-generator/static/js/2.a81abf3c.chunk.js",
+    "static/js/2.a81abf3c.chunk.js.map": "/gradient-generator/static/js/2.a81abf3c.chunk.js.map",
+    "static/js/3.58489b2a.chunk.js": "/gradient-generator/static/js/3.58489b2a.chunk.js",
+    "static/js/3.58489b2a.chunk.js.map": "/gradient-generator/static/js/3.58489b2a.chunk.js.map",
     "index.html": "/gradient-generator/index.html",
-    "static/css/main.c4753687.chunk.css.map": "/gradient-generator/static/css/main.c4753687.chunk.css.map",
-    "static/js/2.9de5839b.chunk.js.LICENSE.txt": "/gradient-generator/static/js/2.9de5839b.chunk.js.LICENSE.txt"
+    "static/css/main.98937bf1.chunk.css.map": "/gradient-generator/static/css/main.98937bf1.chunk.css.map",
+    "static/js/2.a81abf3c.chunk.js.LICENSE.txt": "/gradient-generator/static/js/2.a81abf3c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2721f953.js",
-    "static/js/2.9de5839b.chunk.js",
-    "static/css/main.c4753687.chunk.css",
-    "static/js/main.4d4f6ddd.chunk.js"
+    "static/js/runtime-main.81c18a50.js",
+    "static/js/2.a81abf3c.chunk.js",
+    "static/css/main.98937bf1.chunk.css",
+    "static/js/main.86cf7316.chunk.js"
   ]
 }
