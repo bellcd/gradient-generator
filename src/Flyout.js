@@ -8,7 +8,7 @@ import { gradientWords } from './constants/gradient-constants';
 import breakpoints from './constants/breakpoints';
 import Colors from './Colors';
 import { throttle as _throttle } from 'lodash';
-import { MessagesContext } from './translations/messages';
+import messages, { MessagesContext } from './translations/messages';
 import { MAX_FLYOUT_WIDTH_PERCENT, FLYOUT_WIDTH_THROTTLE } from './constants/flyout-constants';
 
 const Flyout = ({
@@ -224,6 +224,7 @@ const Flyout = ({
               />
             </div>
           </div>
+        <div>{messages.FULLSCREEN}</div>
         </div>
       </div>
     </div>

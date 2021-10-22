@@ -151,4 +151,14 @@ describe('<App />', () => {
       });
     });
   });
+  describe('fullscreen', () => {
+    it('pressing "Escape" toggles fullscreen', () => {
+      setup();
+      fireEvent.keyUp(window, { key: 'Escape' });
+      const gradientDiv = screen.getByTestId('gradient');
+      expect(gradientDiv.className).toMatch(/.*fullScreen.*/)
+      fireEvent.keyUp(window, { key: 'Escape' });
+      expect(gradientDiv.className).not.toMatch(/.*fullScreen.*/);
+    });
+  });
 });
