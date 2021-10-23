@@ -105,7 +105,6 @@ const Flyout = ({
             <code className="language-css">{gradientString}</code>
           </pre>
         </div>
-        {/* <div className="card">{gradientString}</div> */}
         <div className="options card">
           <Colors
             colors={colors}
