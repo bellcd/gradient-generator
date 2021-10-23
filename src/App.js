@@ -7,6 +7,9 @@ import {
 import messages, { MessagesContext } from './translations/messages';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
+import Prism from 'prismjs';
+
+Prism.highlightAll();
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
@@ -136,3 +139,4 @@ export default App;
     // fonts
     // icons
   // mobile design
+  // randomizer
