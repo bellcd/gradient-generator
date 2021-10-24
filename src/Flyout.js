@@ -100,12 +100,24 @@ const Flyout = ({
       >
       </button>
       <div className="flyout__content show-language toolbar">
-        <div className="card">
+        <div className="flyout__gradient-string-wrapper card">
           <pre>
             <code className="language-css">{gradientString}</code>
           </pre>
         </div>
-        <div className="options card">
+        <div className="flyout__add-color card">
+          <button
+              onClick={() => {
+                setColors([...colors, {
+                  color: randomColorGenerator(),
+                  stopPositions: []
+                }])
+              }}
+            >
+              {ADD_A_RANDOM_COLOR}
+          </button>
+        </div>
+        <div className="flyout__colors-list card">
           <Colors
             colors={colors}
             addOrRemoveStopPositionHandler={addOrRemoveStopPositionHandler}
@@ -113,16 +125,8 @@ const Flyout = ({
             deleteColor={deleteColor}
             inputChangeHandler={inputChangeHandler}
           />
-          <button
-            onClick={() => {
-              setColors([...colors, {
-                color: randomColorGenerator(),
-                stopPositions: []
-              }])
-            }}
-          >
-            {ADD_A_RANDOM_COLOR}
-          </button>
+        </div>
+        <div className="flyout__options card">
           <div>
             <label htmlFor={gradientWords.GRADIENT_TYPE}>{GRADIENT_TYPE}</label>
             <select
@@ -228,8 +232,8 @@ const Flyout = ({
               />
             </div>
           </div>
-        <div>{messages.FULLSCREEN}</div>
         </div>
+        <div>{messages.FULLSCREEN}</div>
       </div>
     </div>
   );

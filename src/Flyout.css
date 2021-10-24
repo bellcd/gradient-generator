@@ -5,8 +5,12 @@
   position: relative;
 }
 
-.flyout--closed .flyout__content {
-  overflow: hidden;
+.flyout__content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 1rem;
 }
 
 .flyout__control-button {
@@ -18,10 +22,17 @@
   cursor: pointer;
 }
 
-.flyout__control-button--open {
-  right: -2.4rem;
+.flyout__gradient-string-wrapper {
+  margin-top: 1rem;
 }
 
-.flyout__control-button--closed {
-  right: -4.3rem;
+.flyout__add-color,
+.flyout__colors-list,
+.flyout__options {
+  display: grid;
+  gap: 1rem;
+}
+
+.flyout__colors-list {
+  overflow-y: auto;
 }
