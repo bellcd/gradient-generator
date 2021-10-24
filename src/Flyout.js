@@ -99,8 +99,12 @@ const Flyout = ({
         data-testid="flyout__control-button"
       >
       </button>
-      <div className="flyout__content">
-        <div className="card">{gradientString}</div>
+      <div className="flyout__content show-language toolbar">
+        <div className="card">
+          <pre>
+            <code className="language-css">{gradientString}</code>
+          </pre>
+        </div>
         <div className="options card">
           <Colors
             colors={colors}

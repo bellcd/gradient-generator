@@ -7,6 +7,9 @@ import {
 import messages, { MessagesContext } from './translations/messages';
 import Flyout from './Flyout';
 import { makeGradientString } from './utils/gradient-utils';
+import Prism from 'prismjs';
+
+Prism.highlightAll();
 
 function App() {
   const [colors, setColors] = useState(defaultColors);
@@ -136,3 +139,20 @@ export default App;
     // fonts
     // icons
   // mobile design
+  // randomizer
+  // change display formatting of gradientString
+    // conic-gradient(from 66deg at 37% 65%, #ff0000 1%, #0000ff 32%, #6ecbfb 55.00000000000001%, #8f0b29, #e0a7d7, #f8fcca, #eeffeb, #cde3cc, #fea75d, #cbc5e0)
+    // conic-gradient(
+    //   from 66deg at 37% 65%,
+    //     #ff0000 1%,
+    //     #0000ff 32%,
+    //     #6ecbfb 55.00000000000001%,
+    //     #8f0b29,
+    //     #e0a7d7,
+    //     #f8fcca,
+    //     #eeffeb,
+    //     #cde3cc,
+    //     #fea75d,
+    //     #cbc5e0
+    // )
+  // unit tests failing after ejecting
