@@ -19,6 +19,7 @@ const Flyout = ({
   deleteColor,
   gradientOptions,
   setGradientOptions,
+  handleRandomize
 }) => {
   const {
     ADD_A_RANDOM_COLOR,
@@ -36,7 +37,8 @@ const Flyout = ({
     CLOSEST_CORNER,
     FARTHEST_CORNER,
     X_POSITION,
-    Y_POSITION
+    Y_POSITION,
+    RANDOMIZE_EVERYTHING
   } = useContext(MessagesContext);
 
   const resizingRef = useRef({ isResizing: false, maxFlyoutWidth: 0 });
@@ -115,6 +117,9 @@ const Flyout = ({
               }}
             >
               {ADD_A_RANDOM_COLOR}
+          </button>
+          <button onClick={handleRandomize}>
+              {RANDOMIZE_EVERYTHING}
           </button>
         </div>
         <div className="flyout__colors-list card">

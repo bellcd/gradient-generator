@@ -16,7 +16,7 @@ const Colors = ({
     HEXADECIMAL_FORMAT_EXPLAINER,
     COLOR_PICKER,
     OPTIONAL_STOP_PERCENTS,
-    DELETE_COLOR
+    DELETE
   } = useContext(MessagesContext);
   return (
     <div className="colors">
@@ -28,7 +28,7 @@ const Colors = ({
       </span>
       <span>{COLOR_PICKER}</span>
       <span>{OPTIONAL_STOP_PERCENTS}</span>
-      <span>{DELETE_COLOR}</span>
+      <span>{DELETE}</span>
       {colors.map((colorObj, colorIndex, colorsArray) => {
         return <Color
           key={colorIndex}

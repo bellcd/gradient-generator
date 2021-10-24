@@ -9,7 +9,7 @@ export const makeGradientString = (colors, {
   xPosition,
   yPosition
 }) => {
-  const colorString = combineGradientColorStops(colors);
+  const colorString = combineGradientColorStopsStrings(colors);
   let gradientString;
 
   if (gradientType === LINEAR) {
@@ -32,13 +32,13 @@ export const makeGradientString = (colors, {
   return gradientString;
 };
 
-export const combineGradientColorStops = colors => {
+export const combineGradientColorStopsStrings = colors => {
   return colors.reduce((acc, colorObj, i) => {
-    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStops(colorObj)}`
+    return `${acc}${i === 0 ? '' : ', '}${colorObj.color}${makeGradientColorStopsString(colorObj)}`
   }, '');
 };
 
-export const makeGradientColorStops = colorObj => {
+export const makeGradientColorStopsString = colorObj => {
   return colorObj.stopPositions.length > 0 ? (
     colorObj.stopPositions.reduce((allStops, currentStop, j) => {
       return `${allStops}${j === 0 ? '' : ' '}${currentStop * 100}%`
@@ -58,3 +58,4 @@ export const randomColorGenerator = () => {
   }
   return array.reduce((acc, current) => `${acc}${current}`, '#');
 }
+

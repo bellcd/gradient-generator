@@ -7,7 +7,7 @@ const {
   TYPE_THE_COLOR,
   COLOR_PICKER,
   OPTIONAL_STOP_PERCENTS,
-  DELETE_COLOR,
+  DELETE,
 } = messages;
 
 describe('<Colors />', () => {
@@ -24,6 +24,6 @@ describe('<Colors />', () => {
     expect(screen.getByText(TYPE_THE_COLOR)).toBeInTheDocument();
     expect(screen.getByText(COLOR_PICKER)).toBeInTheDocument();
     expect(screen.getByText(OPTIONAL_STOP_PERCENTS)).toBeInTheDocument();
-    expect(screen.getByText(DELETE_COLOR)).toBeInTheDocument();
+    expect(screen.getByText(DELETE)).toBeInTheDocument();
   });
 });

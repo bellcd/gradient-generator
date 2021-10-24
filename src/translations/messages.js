@@ -28,8 +28,9 @@ const messages = {
     HEXADECIMAL_FORMAT_EXPLAINER: 'Hexadecimal format (ie, a "#", followed by exactly 6 characters. Those 6 characters must be either the digits 0 through 9, or one of the letters, a, b, c, d, e, or f',
     COLOR_PICKER: 'Color Picker',
     OPTIONAL_STOP_PERCENTS: 'Optional Stop Percents',
-    DELETE_COLOR: 'Delete Color',
-    FULLSCREEN: `Press 'Escape' to toggle full screen mode`
+    DELETE: 'Delete',
+    FULLSCREEN: `Press 'Escape' to toggle full screen mode`,
+    RANDOMIZE_EVERYTHING: 'Randomize Everything'
 };
 
 export default messages;

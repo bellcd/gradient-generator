@@ -1,7 +1,7 @@
 import {
   makeGradientString,
-  makeGradientColorStops,
-  combineGradientColorStops,
+  makeGradientColorStopsString,
+  combineGradientColorStopsStrings,
   randomColorGenerator,
 } from './gradient-utils';
 import {
@@ -38,27 +38,27 @@ describe('gradient-utils', () => {
       });
     });
   });
-  describe('makeGradientColorStops', () => {
+  describe('makeGradientColorStopsString', () => {
     it('no stops', () => {
       const color = {
         stopPositions: [],
       }
-      expect(makeGradientColorStops(color)).toBe('');
+      expect(makeGradientColorStopsString(color)).toBe('');
     });
     it('one stop', () => {
       const color = {
         stopPositions: [0.10],
       }
-      expect(makeGradientColorStops(color)).toBe(' 10%');
+      expect(makeGradientColorStopsString(color)).toBe(' 10%');
     });
     it('two stops', () => {
       const color = {
         stopPositions: [0.10, 0.25],
       }
-      expect(makeGradientColorStops(color)).toBe(' 10% 25%');
+      expect(makeGradientColorStopsString(color)).toBe(' 10% 25%');
     });
   });
-  describe('combineGradientColorStops', () => {
+  describe('combineGradientColorStopsStrings', () => {
     it('handles multiple colors with different amounts of color stops correctly', () => {
       const colors = [
         {
@@ -78,7 +78,7 @@ describe('gradient-utils', () => {
           stopPositions: [0.95]
         },
       ];
-      const result = combineGradientColorStops(colors);
+      const result = combineGradientColorStopsStrings(colors);
       expect(result).toBe('#ff0000 10% 25%, #0000ff 30%, #6ecbfb, #c3df7d 95%')
     });
   });
