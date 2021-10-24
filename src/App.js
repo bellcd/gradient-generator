@@ -156,4 +156,3 @@ export default App;
     //     #fea75d,
     //     #cbc5e0
     // )
-  // overflow with many colors

@@ -1,5 +1,5 @@
 .colors {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr 10fr 1fr;
+  grid-template-columns: 4.5rem minmax(5rem, 1fr) 6rem minmax(20rem, 1fr) 6rem;
   gap: 1rem;
 }
