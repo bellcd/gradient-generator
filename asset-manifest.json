@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/gradient-generator/static/css/main.98937bf1.chunk.css",
-    "main.js": "/gradient-generator/static/js/main.4c1dd39b.chunk.js",
-    "main.js.map": "/gradient-generator/static/js/main.4c1dd39b.chunk.js.map",
+    "main.css": "/gradient-generator/static/css/main.7cbacd2b.chunk.css",
+    "main.js": "/gradient-generator/static/js/main.e3a1daaa.chunk.js",
+    "main.js.map": "/gradient-generator/static/js/main.e3a1daaa.chunk.js.map",
     "runtime-main.js": "/gradient-generator/static/js/runtime-main.65cb5ffb.js",
     "runtime-main.js.map": "/gradient-generator/static/js/runtime-main.65cb5ffb.js.map",
     "static/css/2.81c21420.chunk.css": "/gradient-generator/static/css/2.81c21420.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.37b1a44a.chunk.js.map": "/gradient-generator/static/js/3.37b1a44a.chunk.js.map",
     "index.html": "/gradient-generator/index.html",
     "static/css/2.81c21420.chunk.css.map": "/gradient-generator/static/css/2.81c21420.chunk.css.map",
-    "static/css/main.98937bf1.chunk.css.map": "/gradient-generator/static/css/main.98937bf1.chunk.css.map",
+    "static/css/main.7cbacd2b.chunk.css.map": "/gradient-generator/static/css/main.7cbacd2b.chunk.css.map",
     "static/js/2.24b03695.chunk.js.LICENSE.txt": "/gradient-generator/static/js/2.24b03695.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.65cb5ffb.js",
     "static/css/2.81c21420.chunk.css",
     "static/js/2.24b03695.chunk.js",
-    "static/css/main.98937bf1.chunk.css",
-    "static/js/main.4c1dd39b.chunk.js"
+    "static/css/main.7cbacd2b.chunk.css",
+    "static/js/main.e3a1daaa.chunk.js"
   ]
 }
