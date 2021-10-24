@@ -140,3 +140,19 @@ export default App;
     // icons
   // mobile design
   // randomizer
+  // change display formatting of gradientString
+    // conic-gradient(from 66deg at 37% 65%, #ff0000 1%, #0000ff 32%, #6ecbfb 55.00000000000001%, #8f0b29, #e0a7d7, #f8fcca, #eeffeb, #cde3cc, #fea75d, #cbc5e0)
+    // conic-gradient(
+    //   from 66deg at 37% 65%,
+    //     #ff0000 1%,
+    //     #0000ff 32%,
+    //     #6ecbfb 55.00000000000001%,
+    //     #8f0b29,
+    //     #e0a7d7,
+    //     #f8fcca,
+    //     #eeffeb,
+    //     #cde3cc,
+    //     #fea75d,
+    //     #cbc5e0
+    // )
+  // unit tests failing after ejecting
