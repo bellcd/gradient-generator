@@ -138,6 +138,7 @@ export default App;
   // polishing
     // fonts
     // icons
+      // 'press "escape" to toggle fullscreen mode as a tooltip on icon hover
   // mobile design
   // randomizer
   // change display formatting of gradientString
@@ -155,4 +156,3 @@ export default App;
     //     #fea75d,
     //     #cbc5e0
     // )
-  // unit tests failing after ejecting
