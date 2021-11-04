@@ -36,48 +36,93 @@ function App() {
     ) / 100;
     return percent;
   }
-
+  
   const addOrRemoveStopPositionHandler = (colorIndexToChange, isAdd, positionToRemove) => () => {
     const newColors = colors.map((colorObj, index) => {
       if (index === colorIndexToChange) {
-        const stopPositions = colorObj.stopPositions;
-        let min = 0;
-          if (stopPositions.length > 0) {
-            min = stopPositions[stopPositions.length - 1];
-          } else if (index !== 0) {
-            for (let i = index - 1; i >= 0; i--) {
-              if (colors[i].stopPositions.length > 0) {
-                min = colors[i].stopPositions[colors[i].stopPositions.length - 1];
-                break;
-              }
-            }
-          }
-        let max = 1;
-          if (index !== colors.length - 1) {
-            for (let i = index + 1; i < colors.length; i++) {
-              if (colors[i].stopPositions.length > 0) {
-                max = colors[i].stopPositions[0];
-                break;
-              }
-            }
-          }
-
-        const newStopPositions = isAdd ? (
-          [...colorObj.stopPositions, makeRandomPercentInRange(min, max)]
-        ) : (
-          colorObj.stopPositions.filter((position, j) => j !== positionToRemove)
-        );
-
-        return {
-          ...colorObj,
-          stopPositions: newStopPositions
-        }
+       return {
+         ...colorObj,
+         stopPosition: editStopPositions({ colorObj, colors, positionToRemove, isAdd, index })
+       };
       }
       return colorObj;
+      // if (index === colorIndexToChange) {
+      //   const stopPositions = colorObj.stopPositions;
+      //   let min = 0;
+      //     if (stopPositions.length > 0) {
+      //       min = stopPositions[stopPositions.length - 1];
+      //     } else if (index !== 0) {
+      //       for (let i = index - 1; i >= 0; i--) {
+      //         if (colors[i].stopPositions.length > 0) {
+      //           min = colors[i].stopPositions[colors[i].stopPositions.length - 1];
+      //           break;
+      //         }
+      //       }
+      //     }
+      //   let max = 1;
+      //     if (index !== colors.length - 1) {
+      //       for (let i = index + 1; i < colors.length; i++) {
+      //         if (colors[i].stopPositions.length > 0) {
+      //           max = colors[i].stopPositions[0];
+      //           break;
+      //         }
+      //       }
+      //     }
+
+      //   const newStopPositions = isAdd ? (
+      //     [...colorObj.stopPositions, makeRandomPercentInRange(min, max)]
+      //   ) : (
+      //     colorObj.stopPositions.filter((position, j) => j !== positionToRemove)
+      //   );
+
+      //   return {
+      //     ...colorObj,
+      //     stopPositions: newStopPositions
+      //   }
+      // }
+      // return colorObj;
     });
     setColors(newColors);
   };
 
+  const editStopPositions = ({ colorObj, colors, positionToRemove, isAdd, index }) => {
+    const stopPositions = colorObj.stopPositions;
+    let min = 0;
+      if (stopPositions.length > 0) {
+        min = stopPositions[stopPositions.length - 1];
+      } else if (index !== 0) {
+        for (let i = index - 1; i >= 0; i--) {
+          if (colors[i].stopPositions.length > 0) {
+            min = colors[i].stopPositions[colors[i].stopPositions.length - 1];
+            break;
+          }
+        }
+      }
+    let max = 1;
+      if (index !== colors.length - 1) {
+        for (let i = index + 1; i < colors.length; i++) {
+          if (colors[i].stopPositions.length > 0) {
+            max = colors[i].stopPositions[0];
+            break;
+          }
+        }
+      }
+
+    const newStopPositions = isAdd ? (
+      [...colorObj.stopPositions, makeRandomPercentInRange(min, max)]
+    ) : (
+      colorObj.stopPositions.filter((position, j) => j !== positionToRemove)
+    );
+
+    return newStopPositions;
+    // return {
+      //   ...colorObj,
+      //   stopPositions: newStopPositions
+      // }
+
+    }
+  
+      
   const stopPercentChangeHandler = (i, j) => event => {
     const newColors = colors.map((colorObj, index) => {
       if (index === i) {
@@ -113,7 +158,7 @@ function App() {
       const numberOfColors = Math.round(Math.random() * 38) + 2;
       // colors themselves
         // use randomColorGenerator()
-      const colors = new Array(numberOfColors).fill(null).map(() => {
+      let colors = new Array(numberOfColors).fill(null).map(() => {
         return {
           color: randomColorGenerator(),
           stopPositions: []
@@ -121,6 +166,24 @@ function App() {
       })
       // TODO: finish
       // 0, 1, or 2 stop percents per color 
+      colors = colors.map((colorObj, index) => {
+        let newColorObj = {
+          ...colorObj,
+          stopPositions: []
+        }
+        // run the editStopPosition logic 0, 1, or 2 times
+        const num = Math.round(Math.random() * 2);
+        if (num === 0) return newColorObj;
+        for (let i = 0; i < num; i++) {
+          // console.log('i', i);
+          // debugger;
+          newColorObj = {
+            ...newColorObj,
+            stopPositions: editStopPositions({ colorObj: newColorObj, colors, isAdd: true, index })
+          }
+        }
+        return newColorObj;
+      });
         // percentage of the stop percents
     return colors;
   };
@@ -239,6 +302,10 @@ export default App;
     // size
     // x position
     // y position
+  // randomizer v2
+    // lock certain parts, and randomize everything else?
+    // checkmarks to indicate which things get randomized?
+    // smaller scope of randomization, ie - only colors, only options
   // change display formatting of gradientString
     // conic-gradient(from 66deg at 37% 65%, #ff0000 1%, #0000ff 32%, #6ecbfb 55.00000000000001%, #8f0b29, #e0a7d7, #f8fcca, #eeffeb, #cde3cc, #fea75d, #cbc5e0)
     // conic-gradient(
@@ -254,4 +321,5 @@ export default App;
     //     #fea75d,
     //     #cbc5e0
     // )
-  // Colors, might not need the header row of labels, maybe tooltip popups? would prevent horizontal overflow on narrower screens
+    // Colors, might not need the header row of labels, maybe tooltip popups? would prevent horizontal overflow on narrower screens
+  
